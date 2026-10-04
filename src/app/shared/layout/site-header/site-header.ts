@@ -1,11 +1,33 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeToggle } from '../theme-toggle/theme-toggle';
+
+interface NavLink {
+  label: string;
+  path: string;
+}
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive, ThemeToggle],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(document:keydown.escape)': 'closeMenu()' },
 })
-export class SiteHeader {}
+export class SiteHeader {
+  protected readonly links: NavLink[] = [
+    { label: 'About', path: '/about' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Blog', path: '/blog' },
+  ];
+  protected readonly menuOpen = signal(false);
+
+  protected toggleMenu(): void {
+    this.menuOpen.update((open) => !open);
+  }
+
+  protected closeMenu(): void {
+    this.menuOpen.set(false);
+  }
+}
