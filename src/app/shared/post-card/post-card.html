@@ -1,0 +1,10 @@
+<article class="post-card">
+  <h3 class="post-card__title" [style.view-transition-name]="'post-title-' + post().slug">
+    <a [routerLink]="['/blog', post().slug]">{{ post().title }}</a>
+  </h3>
+  <p class="post-card__meta">
+    <time [attr.datetime]="post().date">{{ post().date | date: 'mediumDate' : 'UTC' }}</time>
+    · {{ post().readingMinutes }} min read
+  </p>
+  <p class="post-card__summary">{{ post().summary }}</p>
+</article>

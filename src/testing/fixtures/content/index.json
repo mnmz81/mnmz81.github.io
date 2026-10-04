@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-10-04T00:00:00.000Z",
+  "posts": [
+    {
+      "slug": "building-agents-with-google-adk",
+      "title": "Building agents with Google ADK",
+      "summary": "What I learned shipping an agentic AI feature to production: tools, skills, streaming and keeping costs down.",
+      "date": "2026-09-20",
+      "tags": ["ai", "agents"],
+      "readingMinutes": 6
+    },
+    {
+      "slug": "angular-signals-in-practice",
+      "title": "Angular Signals in practice",
+      "summary": "How signals, computed values and effects changed the way I structure state in Angular apps.",
+      "date": "2026-08-30",
+      "tags": ["angular", "frontend"],
+      "readingMinutes": 4
+    },
+    {
+      "slug": "notes-on-streaming-algorithms",
+      "title": "Notes on streaming algorithms",
+      "summary": "Count-Min Sketch and reservoir sampling, from my M.Sc. course on algorithms for massive data.",
+      "date": "2026-07-15",
+      "tags": ["algorithms", "msc"],
+      "readingMinutes": 5
+    }
+  ],
+  "tags": [
+    { "tag": "agents", "count": 1 },
+    { "tag": "ai", "count": 1 },
+    { "tag": "algorithms", "count": 1 },
+    { "tag": "angular", "count": 1 },
+    { "tag": "frontend", "count": 1 },
+    { "tag": "msc", "count": 1 }
+  ]
+}
