@@ -1,4 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SITE } from '../../../core/site.config';
+
+interface SocialLink {
+  label: string;
+  href: string;
+  icon: 'github' | 'linkedin' | 'email' | 'rss';
+  external: boolean;
+}
 
 @Component({
   selector: 'app-site-footer',
@@ -8,4 +16,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class SiteFooter {
   protected readonly year = new Date().getFullYear();
+  protected readonly author = SITE.author;
+  protected readonly social: SocialLink[] = [
+    { label: 'GitHub', href: SITE.social.github, icon: 'github', external: true },
+    { label: 'LinkedIn', href: SITE.social.linkedin, icon: 'linkedin', external: true },
+    { label: 'Email', href: SITE.social.email, icon: 'email', external: false },
+    { label: 'RSS feed', href: '/rss.xml', icon: 'rss', external: false },
+  ];
 }
