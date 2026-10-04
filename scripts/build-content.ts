@@ -1,7 +1,22 @@
-// Placeholder from Task 00; Task 01 replaces this file with the real pipeline.
-// Copies fixture JSON into public/content so the app builds before Task 01 lands.
-import { cpSync, rmSync } from 'node:fs';
+// Builds public/content/**, public/rss.xml and public/sitemap.xml from content/**/*.md.
+// Usage: npm run content            (published only)
+//        INCLUDE_DRAFTS=1 npm run content
+import { writeFileSync } from 'node:fs';
+import { SITE } from '../src/app/core/site.config';
+import { buildContent } from './content/collect';
+import { buildRss, buildSitemap, sitePaths } from './content/feeds';
 
-rmSync('public/content', { recursive: true, force: true });
-cpSync('src/testing/fixtures/content', 'public/content', { recursive: true });
-console.log('[content] placeholder: copied fixtures to public/content');
+async function main(): Promise<void> {
+  const includeDrafts = process.env['INCLUDE_DRAFTS'] === '1';
+  const { index, projects } = await buildContent({ contentDir: 'content', outDir: 'public/content', includeDrafts });
+  writeFileSync('public/rss.xml', buildRss(index.posts, SITE));
+  writeFileSync('public/sitemap.xml', buildSitemap(sitePaths(index), SITE.url));
+  console.log(
+    `[content] ${index.posts.length} posts, ${index.tags.length} tags, ${projects.length} projects${includeDrafts ? ' (drafts included)' : ''}`,
+  );
+}
+
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
+});
