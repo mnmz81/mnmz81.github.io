@@ -1,4 +1,34 @@
 <article class="project-card">
-  <h3>{{ project().title }}</h3>
-  <p>{{ project().summary }}</p>
+  @if (project().image) {
+    <img class="project-card__image" [src]="project().image" alt="" loading="lazy" width="640" height="360" />
+  }
+  <h3 class="project-card__title">{{ project().title }}</h3>
+  <p class="project-card__summary">{{ project().summary }}</p>
+  <ul class="project-card__tech" aria-label="Technologies">
+    @for (tech of project().tech; track tech) {
+      <li class="chip">{{ tech }}</li>
+    }
+  </ul>
+  @if (project().repo || project().url) {
+    <div class="project-card__links">
+      @if (project().repo) {
+        <a
+          class="btn btn--ghost"
+          [href]="project().repo"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'Source code of ' + project().title + ' on GitHub'"
+        >Code</a>
+      }
+      @if (project().url) {
+        <a
+          class="btn btn--primary"
+          [href]="project().url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'Open ' + project().title"
+        >Live</a>
+      }
+    </div>
+  }
 </article>

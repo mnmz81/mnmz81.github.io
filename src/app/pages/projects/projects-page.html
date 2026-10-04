@@ -1,1 +1,16 @@
-<section class="container"><h1>Projects</h1></section>
+<div class="container section">
+  <header class="projects__intro" appReveal>
+    <h1><span class="text-gradient">Projects</span></h1>
+    <p class="projects__lead">Things I've built: side projects, open source and experiments.</p>
+  </header>
+
+  @if (projects().length) {
+    <div class="projects__grid">
+      @for (project of projects(); track project.slug; let i = $index) {
+        <app-project-card [project]="project" appReveal [revealDelay]="(i % 3) * 100" />
+      }
+    </div>
+  } @else {
+    <p class="projects__empty">Projects are on the way.</p>
+  }
+</div>

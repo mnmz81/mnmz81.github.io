@@ -1,0 +1,19 @@
+.projects__intro {
+  margin-bottom: var(--space-7);
+}
+
+.projects__lead {
+  max-width: var(--prose-max);
+  color: var(--color-muted);
+  font-size: 1.125rem;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-5);
+}
+
+.projects__empty {
+  color: var(--color-muted);
+}
