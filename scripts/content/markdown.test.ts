@@ -17,6 +17,14 @@ describe('markdown renderer', () => {
     ]);
   });
 
+  it('builds plain-text toc entries from inline markdown', () => {
+    const { toc } = render('## Using `signal()` and *more*\n\n### Don\'t [link](http://x.y)\n');
+    expect(toc).toEqual([
+      { id: 'using-signal-and-more', text: 'Using signal() and more', depth: 2 },
+      { id: 'dont-link', text: 'Don\u2019t link', depth: 3 },
+    ]);
+  });
+
   it('de-duplicates heading ids within a document', () => {
     const { toc } = render('## Setup\n\n## Setup\n');
     expect(toc.map((t) => t.id)).toEqual(['setup', 'setup-1']);
