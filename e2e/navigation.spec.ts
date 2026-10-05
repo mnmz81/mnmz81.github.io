@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test';
+import { SITE } from '../src/app/core/site.config';
+
+const BLOG = SITE.features.blog;
 
 test('home renders the hero', async ({ page }) => {
   await page.goto('/');
@@ -11,7 +14,7 @@ test('main nav reaches every section', async ({ page, isMobile }) => {
   for (const [label, path, title] of [
     ['About', '/about', 'About · Moris Maor Zakay'],
     ['Projects', '/projects', 'Projects · Moris Maor Zakay'],
-    ['Blog', '/blog', 'Blog · Moris Maor Zakay'],
+    ...(BLOG ? ([['Blog', '/blog', 'Blog · Moris Maor Zakay']] as const) : []),
   ] as const) {
     if (isMobile) await page.getByRole('button', { name: 'Menu' }).click();
     await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: label }).click();
@@ -24,6 +27,16 @@ test('main nav reaches every section', async ({ page, isMobile }) => {
     }
     await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: label })).toHaveAttribute('aria-current', 'page');
     if (isMobile) await page.getByRole('button', { name: 'Menu' }).click();
+  }
+});
+
+test('blog is unreachable while hidden', async ({ page }) => {
+  test.skip(BLOG, 'blog is enabled');
+  await page.goto('/');
+  await expect(page.locator('a[href^="/blog"], link[href="/rss.xml"]')).toHaveCount(0);
+  for (const path of ['/blog', '/blog/angular-signals-in-practice', '/rss.xml']) {
+    const res = await page.goto(path);
+    expect(res?.status(), path).toBe(404);
   }
 });
 
@@ -45,7 +58,7 @@ test('skip link moves focus to main content', async ({ page, isMobile }) => {
 
 test('no horizontal scroll at 360px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
-  for (const path of ['/', '/about', '/projects', '/blog', '/blog/angular-signals-in-practice']) {
+  for (const path of ['/', '/about', '/projects', ...(BLOG ? ['/blog', '/blog/angular-signals-in-practice'] : [])]) {
     await page.goto(path);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, path).toBeLessThanOrEqual(0);

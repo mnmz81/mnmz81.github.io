@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test';
+import { SITE } from '../src/app/core/site.config';
+
+test.skip(!SITE.features.blog, 'blog is hidden (SITE.features.blog = false)');
 
 test('blog lists posts and filters by tag', async ({ page }) => {
   await page.goto('/blog');

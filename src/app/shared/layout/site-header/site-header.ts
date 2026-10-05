@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { SITE } from '../../../core/site.config';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 interface NavLink {
@@ -19,7 +20,7 @@ export class SiteHeader {
   protected readonly links: NavLink[] = [
     { label: 'About', path: '/about' },
     { label: 'Projects', path: '/projects' },
-    { label: 'Blog', path: '/blog' },
+    ...(SITE.features.blog ? [{ label: 'Blog', path: '/blog' }] : []),
   ];
   protected readonly menuOpen = signal(false);
   private readonly menuButton = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');

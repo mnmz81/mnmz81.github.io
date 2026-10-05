@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ContentIndex, Project } from '../../core/content.models';
 import { CV } from '../../core/cv.data';
+import { setBlogEnabled } from '../../../testing/blog-flag';
 import { FIXTURE_INDEX, FIXTURE_PROJECTS } from '../../../testing/fixtures';
 import { HomePage } from './home-page';
 
@@ -16,7 +17,12 @@ async function render(index: ContentIndex = FIXTURE_INDEX, projects: Project[] =
 }
 
 describe('HomePage', () => {
-  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter([])] }));
+  let restoreBlog: () => void;
+  beforeEach(() => {
+    restoreBlog = setBlogEnabled(true);
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+  });
+  afterEach(() => restoreBlog());
 
   it('renders the hero with name, headline and tagline', async () => {
     const el = await render();
@@ -31,6 +37,14 @@ describe('HomePage', () => {
     expect(el.querySelector('a[href="/blog"]')).not.toBeNull();
     expect(el.querySelector('.hero__actions a[href="/about"]')).not.toBeNull();
     expect(el.querySelector('a[download]')).toBeNull();
+  });
+
+  it('hides the blog CTA and posts when the blog is off', async () => {
+    setBlogEnabled(false);
+    const el = await render();
+    expect(el.querySelector('a[href^="/blog"]')).toBeNull();
+    expect(el.querySelector('#latest-posts')).toBeNull();
+    expect(el.querySelector('.hero__actions a[href="/projects"]')).not.toBeNull();
   });
 
   it('renders the three highlights', async () => {
