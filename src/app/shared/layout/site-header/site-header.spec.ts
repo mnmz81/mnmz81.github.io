@@ -42,6 +42,29 @@ describe('SiteHeader', () => {
     expect(button.getAttribute('aria-expanded')).toBe('false');
   });
 
+  it('returns focus to the menu button when Escape closes the open menu', async () => {
+    const fixture = TestBed.createComponent(SiteHeader);
+    document.body.appendChild(fixture.nativeElement);
+    await fixture.whenStable();
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector('.site-header__menu-btn');
+    button.style.display = 'inline-grid'; // the button is only displayed below 768px; jsdom ignores media queries
+    const firstLink: HTMLAnchorElement = fixture.nativeElement.querySelector('nav a');
+
+    button.click();
+    await fixture.whenStable();
+    firstLink.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await fixture.whenStable();
+    expect(document.activeElement).toBe(button);
+
+    // Escape while closed must not steal focus.
+    firstLink.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await fixture.whenStable();
+    expect(document.activeElement).toBe(firstLink);
+    fixture.nativeElement.remove();
+  });
+
   it('marks the active section with aria-current', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/blog/some-post');

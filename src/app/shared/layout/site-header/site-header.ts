@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
@@ -13,7 +13,7 @@ interface NavLink {
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(document:keydown.escape)': 'closeMenu()' },
+  host: { '(document:keydown.escape)': 'onEscape()' },
 })
 export class SiteHeader {
   protected readonly links: NavLink[] = [
@@ -22,6 +22,7 @@ export class SiteHeader {
     { label: 'Blog', path: '/blog' },
   ];
   protected readonly menuOpen = signal(false);
+  private readonly menuButton = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');
 
   protected toggleMenu(): void {
     this.menuOpen.update((open) => !open);
@@ -29,5 +30,11 @@ export class SiteHeader {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  protected onEscape(): void {
+    if (!this.menuOpen()) return;
+    this.closeMenu();
+    this.menuButton().nativeElement.focus();
   }
 }
