@@ -238,7 +238,7 @@ export const CV: Cv = {
   name: 'Moris Maor Zakay',
   headline: 'Software Engineer · Full-Stack & AI Application Development',
   tagline: 'I build full-stack products and production agentic AI features, and write about what I learn along the way.',
-  location: 'Gadot, Israel (open to hybrid)',
+  location: 'Upper Galilee, Israel (open to hybrid)',
   summary:
     'Software engineer with 5+ years building enterprise product features at BMC Software (Control-M), including designing and shipping agentic AI capabilities in production. Built LLM-powered features with Google ADK and LiteLLM on AWS Bedrock (Claude), and improved their cost, latency, and reliability through prompt engineering, multi-agent orchestration, and LLM evaluation pipelines. Full-stack across Angular/TypeScript and Python. Pursuing an M.Sc. in Computer Science (ML focus).',
   experience: [
