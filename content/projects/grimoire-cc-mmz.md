@@ -5,5 +5,5 @@ tech: [Python, Shell, GitHub Actions, Claude Code]
 repo: https://github.com/mnmz81/grimoire-cc-mmz
 featured: true
 order: 1
-date: 2026-09-01
+date: 2026-06-16
 ---
