@@ -69,8 +69,11 @@ Pushes to `main` deploy to GitHub Pages. See [docs/deploy.md](docs/deploy.md) fo
 ## Before going live
 
 - [ ] Replace the profile photo: add `public/profile.jpg` and set `SITE.profileImage` in `src/app/core/site.config.ts`.
-- [ ] Set real dates on the projects in `content/projects/`.
-- [ ] Publish the first real post (remove `draft: true`); the sample posts are drafts.
-- [ ] Optional: set `SITE.analytics.goatcounterCode` in `src/app/core/site.config.ts` to enable cookie-free GoatCounter page views.
+
+## Future features
+
+- Analytics: create a GoatCounter site and set `SITE.analytics.goatcounterCode` in `src/app/core/site.config.ts` (cookie-free page views; the code path already exists).
+- Custom domain: candidates `moriszakay.dev` (preferred), `zakay.dev`, `moriszakay.com`; setup steps in [docs/deploy.md](docs/deploy.md).
+- Blog: move it to its own site and link to it from here, or set `SITE.features.blog` to `true` to publish it on this site.
 
 Implementation plan and contracts: [docs/plan/README.md](docs/plan/README.md).
