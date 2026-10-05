@@ -14,7 +14,7 @@ export const SITE = {
   },
   social: {
     github: 'https://github.com/mnmz81',
-    linkedin: 'https://www.linkedin.com/in/moris-maor-zakay',
+    linkedin: 'https://www.linkedin.com/in/moris-maor-zakay-0974189b',
     email: 'mailto:moriszakay42@gmail.com',
   },
   analytics: {
