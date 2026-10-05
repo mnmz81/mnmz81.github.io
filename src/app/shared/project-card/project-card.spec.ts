@@ -26,7 +26,7 @@ describe('ProjectCard', () => {
     const repo = el.querySelector(`a[href="${project.repo}"]`);
     const live = el.querySelector(`a[href="${project.url}"]`);
     expect(repo?.getAttribute('aria-label')).toBe(`Source code of ${project.title} on GitHub`);
-    expect(live?.getAttribute('aria-label')).toBe(`Open ${project.title}`);
+    expect(live?.getAttribute('aria-label')).toBe(`Live site of ${project.title}`);
     expect(repo?.getAttribute('rel')).toBe('noopener noreferrer');
   });
 
