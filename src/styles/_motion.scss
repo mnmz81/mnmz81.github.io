@@ -1,1 +1,78 @@
-// Reveal, view-transition and reduced-motion styles. Implemented in Task 10.
+// Reveal on scroll (RevealDirective adds these classes in the browser only).
+.reveal {
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal--pending {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: none;
+}
+
+// Route transitions (router: withViewTransitions()).
+// Post titles morph between card and page via view-transition-name: post-title-<slug>.
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(*) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out var(--duration-base) var(--ease-out) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in var(--duration-base) var(--ease-out) both;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// Global kill switch: every animation and transition on the site stops.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .reveal--pending {
+    opacity: 1;
+    transform: none;
+  }
+}
