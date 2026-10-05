@@ -1,8 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { FIXTURE_INDEX } from '../../../testing/fixtures';
 import { PostCard } from './post-card';
+
+// Angular's DatePipe parses bare YYYY-MM-DD as local midnight; pin an east-of-UTC zone so the date test catches that on any runner.
+// (spec tsconfig has no node types, so reach process via globalThis)
+const env = (globalThis as unknown as { process: { env: Record<string, string | undefined> } }).process.env;
+const ORIGINAL_TZ = env['TZ'];
+env['TZ'] = 'Asia/Jerusalem';
 
 const post = FIXTURE_INDEX.posts[1]; // angular-signals-in-practice, 2026-08-30
 
@@ -14,6 +20,11 @@ async function render() {
 }
 
 describe('PostCard', () => {
+  afterAll(() => {
+    if (ORIGINAL_TZ === undefined) delete env['TZ'];
+    else env['TZ'] = ORIGINAL_TZ;
+  });
+
   beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter([])] }));
 
   it('links the title to the post', async () => {
