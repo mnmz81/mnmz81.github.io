@@ -9,7 +9,6 @@ export const REQUIRED_FILES = [
   '404.html',
   'rss.xml',
   'sitemap.xml',
-  'cv.pdf',
   'content/index.json',
   'content/projects.json',
 ];

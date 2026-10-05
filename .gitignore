@@ -53,3 +53,5 @@ Thumbs.db
 # playwright
 /test-results/
 /playwright-report/
+# private CV sources (contain a phone number)
+/resume/

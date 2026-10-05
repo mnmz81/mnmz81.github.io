@@ -39,9 +39,8 @@ describe('AboutPage', () => {
     for (const lang of CV.languages) expect(el.textContent).toContain(lang);
   });
 
-  it('offers the CV download', async () => {
-    const link = (await render()).querySelector('a[href="/cv.pdf"]');
-    expect(link?.hasAttribute('download')).toBe(true);
+  it('does not offer a CV download', async () => {
+    expect((await render()).querySelector('a[download]')).toBeNull();
   });
 
   it('uses a single h1 and sets the title', async () => {

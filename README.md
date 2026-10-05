@@ -67,7 +67,6 @@ Pushes to `main` deploy to GitHub Pages. See [docs/deploy.md](docs/deploy.md) fo
 ## Before going live
 
 - [ ] Replace the profile photo: add `public/profile.jpg` and set `SITE.profileImage` in `src/app/core/site.config.ts`.
-- [ ] Put the CV at `public/cv.pdf`, and decide whether it should include a phone number (it is publicly downloadable).
 - [ ] Set real dates on the projects in `content/projects/`.
 - [ ] Publish the first real post (remove `draft: true`); the sample posts are drafts.
 - [ ] Optional: set `SITE.analytics.goatcounterCode` in `src/app/core/site.config.ts` to enable cookie-free GoatCounter page views.

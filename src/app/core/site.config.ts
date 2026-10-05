@@ -6,7 +6,6 @@ export const SITE = {
     'Software engineer building full-stack products and agentic AI applications. Notes on AI, Angular, and what I learn along the way.',
   author: 'Moris Maor Zakay',
   locale: 'en',
-  cvPdfPath: '/cv.pdf',
   profileImage: '/profile-placeholder.svg',
   defaultOgImage: '/og/default.png',
   social: {
