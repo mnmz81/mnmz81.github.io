@@ -19,6 +19,8 @@ A bare `ng build` fails: the content JSON must be generated first. `npm run buil
 
 ## Writing a post
 
+> The blog is currently hidden: `SITE.features.blog` is `false` in `src/app/core/site.config.ts`, so there are no `/blog` pages, nav link, RSS feed or sitemap entries, and posts are not built. Set it to `true` to publish.
+
 Create `content/blog/<kebab-slug>.md`. The filename (without `.md`) is the URL slug: `/blog/<kebab-slug>`.
 
 ```yaml

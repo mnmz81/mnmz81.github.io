@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { setBlogEnabled } from '../../../../testing/blog-flag';
 import { SiteHeader } from './site-header';
 
 @Component({ template: '' })
@@ -18,13 +19,24 @@ describe('SiteHeader', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   it('renders brand and nav links', async () => {
+    const restore = setBlogEnabled(true);
     const fixture = TestBed.createComponent(SiteHeader);
+    restore();
     await fixture.whenStable();
     const el: HTMLElement = fixture.nativeElement;
     const hrefs = [...el.querySelectorAll('nav a')].map((a) => a.getAttribute('href'));
     expect(hrefs).toEqual(['/about', '/projects', '/blog']);
     expect(el.querySelector('.site-header__brand')?.getAttribute('href')).toBe('/');
     expect(el.querySelector('app-theme-toggle')).not.toBeNull();
+  });
+
+  it('hides the Blog link when the blog is off', async () => {
+    const restore = setBlogEnabled(false);
+    const fixture = TestBed.createComponent(SiteHeader);
+    restore();
+    await fixture.whenStable();
+    const hrefs = [...fixture.nativeElement.querySelectorAll('nav a')].map((a: Element) => a.getAttribute('href'));
+    expect(hrefs).toEqual(['/about', '/projects']);
   });
 
   it('toggles the mobile menu and closes it on Escape', async () => {
@@ -68,7 +80,9 @@ describe('SiteHeader', () => {
   it('marks the active section with aria-current', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/blog/some-post');
+    const restore = setBlogEnabled(true);
     const fixture = TestBed.createComponent(SiteHeader);
+    restore();
     await fixture.whenStable();
     const blog = [...fixture.nativeElement.querySelectorAll('nav a')].find((a: Element) => a.textContent?.trim() === 'Blog');
     expect(blog?.getAttribute('aria-current')).toBe('page');

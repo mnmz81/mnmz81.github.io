@@ -23,7 +23,7 @@ export class HomePage {
 
   protected readonly cv = CV;
   protected readonly site = SITE;
-  protected readonly latestPosts = computed(() => this.index().posts.slice(0, LATEST_POSTS));
+  protected readonly latestPosts = computed(() => (SITE.features.blog ? this.index().posts.slice(0, LATEST_POSTS) : []));
   protected readonly featuredProjects = computed(() => this.projects().filter((p) => p.featured));
 
   constructor() {

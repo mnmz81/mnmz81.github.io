@@ -61,6 +61,16 @@ describe('buildContent', () => {
     expect(readJson(join(dirs.outDir, 'index.json')).posts).toHaveLength(1);
   });
 
+  it('skips every post when includePosts is false', async () => {
+    const dirs = makeContent({ 'blog/live.md': post('Live', '2026-01-01', 'ai'), 'projects/a.md': project('A', 1) });
+    await buildContent({ ...dirs, includeDrafts: true, includePosts: false });
+    const index = readJson(join(dirs.outDir, 'index.json'));
+    expect(index.posts).toEqual([]);
+    expect(index.tags).toEqual([]);
+    expect(existsSync(join(dirs.outDir, 'posts', 'live.json'))).toBe(false);
+    expect(readJson(join(dirs.outDir, 'projects.json'))).toHaveLength(1);
+  });
+
   it('removes JSON for posts that no longer exist', async () => {
     const dirs = makeContent({ 'blog/keep.md': post('Keep', '2026-01-01', 'ai') });
     mkdirSync(join(dirs.outDir, 'posts'), { recursive: true });

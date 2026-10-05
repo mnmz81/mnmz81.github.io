@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, DOCUMENT, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AnalyticsService } from './core/analytics.service';
+import { SITE } from './core/site.config';
 import { SiteFooter } from './shared/layout/site-footer/site-footer';
 import { SiteHeader } from './shared/layout/site-header/site-header';
 
@@ -16,6 +17,13 @@ export class App {
 
   constructor() {
     inject(AnalyticsService).init();
+    if (SITE.features.blog) this.addFeedLink();
+  }
+
+  private addFeedLink(): void {
+    const link = this.document.createElement('link');
+    Object.assign(link, { rel: 'alternate', type: 'application/rss+xml', title: `${SITE.title} — Blog`, href: '/rss.xml' });
+    this.document.head.appendChild(link);
   }
 
   protected skipToMain(event: Event): void {
