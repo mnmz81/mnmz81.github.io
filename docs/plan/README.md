@@ -19,7 +19,7 @@
 - Every animation/transition must be disabled under `prefers-reduced-motion: reduce`.
 - WCAG AA contrast in both themes; visible `:focus-visible` ring; interactive targets ≥ 44×44px.
 - Layout works at 360px wide with no horizontal scroll and 16px side gutters (`.container`).
-- Dates: `DatePipe` `'mediumDate'` with timezone `'UTC'`.
+- Dates: `DatePipe` `'mediumDate'` with timezone `'UTC'`, on `date + 'T00:00:00Z'` (bare YYYY-MM-DD parses as local midnight; see contracts §6).
 - Never `href="#..."` for in-page links; use `routerLink` + `fragment`.
 - `[innerHTML]` + `bypassSecurityTrustHtml` is allowed in exactly one place: the post body in `BlogPostPage`.
 - Modify only files your task owns (see contracts §8). Do not edit `package.json`.

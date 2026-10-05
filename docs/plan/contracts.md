@@ -230,7 +230,7 @@ Pages declare resolved data as `input.required<T>()` with the names above. Pages
 
 **View-transition name contract:** the post title element in `PostCard` and the `<h1>` in `BlogPostPage` both set `view-transition-name: post-title-<slug>`.
 
-**Dates:** always format with `DatePipe`, `'mediumDate'`, timezone `'UTC'` (`{{ d | date: 'mediumDate' : 'UTC' }}`).
+**Dates:** always format with `DatePipe`, `'mediumDate'`, timezone `'UTC'`, and append `'T00:00:00Z'` to the bare `YYYY-MM-DD` string (`{{ d + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}`). Angular's DatePipe parses a bare `YYYY-MM-DD` as *local* midnight, which shows the previous day east of UTC. Keep `[attr.datetime]` as the bare date. Date tests pin `process.env['TZ'] = 'Asia/Jerusalem'` so the bug can't hide on UTC machines.
 
 **In-page links:** never use bare `href="#id"` (the `<base href="/">` turns it into a link to home). Use `[routerLink]="[]" [fragment]="id"` or a click handler.
 

@@ -161,12 +161,12 @@ export class BlogPostPage {
 
   <header class="post__header">
     <p class="post__meta">
-      <time [attr.datetime]="post().date">{{ post().date | date: 'mediumDate' : 'UTC' }}</time>
+      <time [attr.datetime]="post().date">{{ post().date + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}</time>
       <span aria-hidden="true">·</span>
       <span>{{ post().readingMinutes }} min read</span>
       @if (post().updated; as updated) {
         <span aria-hidden="true">·</span>
-        <span>Updated <time [attr.datetime]="updated">{{ updated | date: 'mediumDate' : 'UTC' }}</time></span>
+        <span>Updated <time [attr.datetime]="updated">{{ updated + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}</time></span>
       }
     </p>
     <h1 class="post__title" [style.view-transition-name]="'post-title-' + post().slug">{{ post().title }}</h1>
