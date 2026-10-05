@@ -67,6 +67,12 @@ describe('readEntry', () => {
     expect(() => readEntry(page({ Type: { type: 'select', select: null } }))).toThrow(/Type must be Blog or Project/);
   });
 
+  it('rejects slugs that are empty or invalid after slugify', () => {
+    const hebrew = { Title: { type: 'title', title: rich('שלום עולם') } };
+    expect(() => readEntry(page(hebrew))).toThrow(/Slug/);
+    expect(() => readEntry(page({ Slug: { type: 'rich_text', rich_text: rich('---') } }))).toThrow(/Slug "-" is empty or invalid/);
+  });
+
   it('rejects pages without a date', () => {
     expect(() => readEntry(page({ Date: { type: 'date', date: null } }))).toThrow(/Date is required/);
   });

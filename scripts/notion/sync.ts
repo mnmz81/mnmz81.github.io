@@ -1,5 +1,5 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { type NotionPageLike, readEntry, rewriteImages, toMarkdownFile } from './mapping';
 
 export interface NotionSource {
@@ -27,7 +27,11 @@ export async function runSync({ source, download, contentDir, publicDir }: SyncO
       let body = '';
       if (isBlog) {
         const { markdown, downloads } = rewriteImages(await source.pageMarkdown(page.id), entry.slug);
-        rmSync(join(publicDir, 'images', entry.slug), { recursive: true, force: true });
+        const imagesRoot = resolve(publicDir, 'images');
+        const imageDir = resolve(imagesRoot, entry.slug);
+        const rel = relative(imagesRoot, imageDir);
+        if (!rel || rel.startsWith('..') || isAbsolute(rel)) throw new Error(`Refusing to clear image directory for slug "${entry.slug}"`);
+        rmSync(imageDir, { recursive: true, force: true });
         for (const { url, file } of downloads) {
           const destination = join(publicDir, file);
           mkdirSync(dirname(destination), { recursive: true });
