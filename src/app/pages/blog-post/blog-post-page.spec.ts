@@ -72,4 +72,11 @@ describe('BlogPostPage', () => {
     await render();
     expect(TestBed.inject(Title).getTitle()).toBe('Angular Signals in practice · Moris Maor Zakay');
   });
+
+  it('uses the trailing-slash page URL in JSON-LD', async () => {
+    await render();
+    const ld = JSON.parse(document.head.querySelector('script[type="application/ld+json"]')?.textContent ?? '{}');
+    expect(ld.url).toBe('https://mnmz81.github.io/blog/angular-signals-in-practice/');
+    expect(ld.mainEntityOfPage).toBe(ld.url);
+  });
 });

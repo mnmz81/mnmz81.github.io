@@ -11,7 +11,7 @@ test('RSS feed lists posts', async ({ request }) => {
   expect(res.status()).toBe(200);
   const xml = await res.text();
   expect(xml).toContain('<rss version="2.0"');
-  expect(xml).toContain('/blog/angular-signals-in-practice</link>');
+  expect(xml).toContain('/blog/angular-signals-in-practice/</link>');
 });
 
 test('sitemap lists pages', async ({ request }) => {

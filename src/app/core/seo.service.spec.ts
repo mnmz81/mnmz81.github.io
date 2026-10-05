@@ -27,14 +27,14 @@ describe('SeoService', () => {
     seo.set({ title: 'About', description: 'About me', path: '/about' });
     expect(TestBed.inject(Title).getTitle()).toBe('About · Moris Maor Zakay');
     expect(meta('name', 'description')).toBe('About me');
-    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe('https://mnmz81.github.io/about');
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe('https://mnmz81.github.io/about/');
   });
 
   it('sets Open Graph and Twitter tags with absolute default image', () => {
     seo.set({ title: 'About', description: 'About me', path: '/about' });
     expect(meta('property', 'og:title')).toBe('About · Moris Maor Zakay');
     expect(meta('property', 'og:description')).toBe('About me');
-    expect(meta('property', 'og:url')).toBe('https://mnmz81.github.io/about');
+    expect(meta('property', 'og:url')).toBe('https://mnmz81.github.io/about/');
     expect(meta('property', 'og:type')).toBe('website');
     expect(meta('property', 'og:image')).toBe('https://mnmz81.github.io/og/default.png');
     expect(meta('property', 'og:site_name')).toBe('Moris Maor Zakay');

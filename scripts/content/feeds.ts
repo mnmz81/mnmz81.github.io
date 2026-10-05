@@ -1,3 +1,4 @@
+import { pageUrl } from '../../src/app/core/site.config';
 import type { ContentIndex, PostMeta } from '../../src/app/core/content.models';
 
 export interface FeedSite {
@@ -14,7 +15,7 @@ const rfc822 = (date: string) => new Date(`${date}T00:00:00Z`).toUTCString();
 export function buildRss(posts: PostMeta[], site: FeedSite): string {
   const items = posts
     .map((post) => {
-      const link = `${site.url}/blog/${post.slug}`;
+      const link = pageUrl(`/blog/${post.slug}`, site.url);
       const categories = post.tags.map((t) => `      <category>${escapeXml(t)}</category>`).join('\n');
       return [
         '    <item>',
@@ -57,6 +58,6 @@ export function sitePaths(index: ContentIndex): string[] {
 }
 
 export function buildSitemap(paths: string[], siteUrl: string): string {
-  const urls = paths.map((p) => `  <url><loc>${escapeXml(siteUrl + p)}</loc></url>`).join('\n');
+  const urls = paths.map((p) => `  <url><loc>${escapeXml(pageUrl(p, siteUrl))}</loc></url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }

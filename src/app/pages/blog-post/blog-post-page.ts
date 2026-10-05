@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import type { Post } from '../../core/content.models';
 import { SeoService } from '../../core/seo.service';
-import { SITE } from '../../core/site.config';
+import { SITE, pageUrl } from '../../core/site.config';
 
 @Component({
   selector: 'app-blog-post-page',
@@ -26,7 +26,7 @@ export class BlogPostPage {
     const seo = inject(SeoService);
     effect(() => {
       const post = this.post();
-      const url = `${SITE.url}/blog/${post.slug}`;
+      const url = pageUrl(`/blog/${post.slug}`);
       seo.set({
         title: post.title,
         description: post.summary,
