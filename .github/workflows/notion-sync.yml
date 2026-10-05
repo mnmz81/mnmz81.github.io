@@ -1,0 +1,42 @@
+name: Notion sync
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pull published pages from Notion
+        run: npm run sync:notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+
+      - name: Validate content
+        run: npm run content
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: notion-sync
+          delete-branch: true
+          commit-message: 'content: sync from Notion'
+          title: 'content: sync from Notion'
+          body: Automated sync of Published pages from Notion. Review the Markdown and images, then merge to deploy.
+          add-paths: |
+            content/**
+            public/images/**

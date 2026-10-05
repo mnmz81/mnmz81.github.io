@@ -1,0 +1,75 @@
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <span class="hero__blob hero__blob--one"></span>
+    <span class="hero__blob hero__blob--two"></span>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow hero__line" style="--i: 0">Hi, I'm</p>
+      <h1 class="hero__name hero__line" style="--i: 1"><span class="text-gradient">{{ cv.name }}</span></h1>
+      <p class="hero__headline hero__line" style="--i: 2">{{ cv.headline }}</p>
+      <p class="hero__tagline hero__line" style="--i: 3">{{ cv.tagline }}</p>
+
+      <div class="hero__actions hero__line" style="--i: 4">
+        <a class="btn btn--primary" routerLink="/blog">Read the blog</a>
+        <a class="btn btn--ghost" [href]="site.cvPdfPath" download="Moris-Maor-Zakay-CV.pdf">Download CV</a>
+      </div>
+
+      <ul class="hero__social hero__line" style="--i: 5">
+        <li><a [href]="site.social.github" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a [href]="site.social.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a [href]="site.social.email">Email</a></li>
+      </ul>
+    </div>
+
+    <img
+      class="hero__photo"
+      [src]="site.profileImage"
+      [alt]="'Portrait of ' + cv.name"
+      width="320"
+      height="320"
+      fetchpriority="high"
+    />
+  </div>
+</section>
+
+<section class="section container" aria-labelledby="highlights-title">
+  <h2 id="highlights-title" class="section__title" appReveal>What I do</h2>
+  <ul class="highlights">
+    @for (item of cv.highlights; track item.title; let i = $index) {
+      <li class="highlight" appReveal [revealDelay]="i * 100">
+        <h3 class="highlight__title">{{ item.title }}</h3>
+        <p class="highlight__text">{{ item.description }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+@if (latestPosts().length) {
+  <section id="latest-posts" class="section container" aria-labelledby="posts-title">
+    <div class="section-head" appReveal>
+      <h2 id="posts-title" class="section__title">Latest posts</h2>
+      <a routerLink="/blog" class="section-head__link">All posts →</a>
+    </div>
+    <div class="grid">
+      @for (post of latestPosts(); track post.slug; let i = $index) {
+        <app-post-card [post]="post" appReveal [revealDelay]="i * 100" />
+      }
+    </div>
+  </section>
+}
+
+@if (featuredProjects().length) {
+  <section class="section container" aria-labelledby="projects-title">
+    <div class="section-head" appReveal>
+      <h2 id="projects-title" class="section__title">Featured projects</h2>
+      <a routerLink="/projects" class="section-head__link">All projects →</a>
+    </div>
+    <div class="grid">
+      @for (project of featuredProjects(); track project.slug; let i = $index) {
+        <app-project-card [project]="project" appReveal [revealDelay]="i * 100" />
+      }
+    </div>
+  </section>
+}

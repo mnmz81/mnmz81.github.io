@@ -1,0 +1,67 @@
+<div class="container about">
+  <header class="about__intro section" appReveal>
+    <h1>About <span class="text-gradient">me</span></h1>
+    <p class="about__summary">{{ cv.summary }}</p>
+    <p class="about__location">{{ cv.location }}</p>
+    <a class="btn btn--primary" [href]="cvPdfPath" download="Moris-Maor-Zakay-CV.pdf">Download CV (PDF)</a>
+  </header>
+
+  <section class="section" aria-labelledby="experience-title">
+    <h2 id="experience-title" class="section__title" appReveal>Experience</h2>
+    <ol class="timeline">
+      @for (job of cv.experience; track job.company + job.start) {
+        <li class="timeline__item" appReveal>
+          <div class="timeline__head">
+            <h3 class="timeline__role">{{ job.role }}</h3>
+            <p class="timeline__meta">
+              {{ job.company }} · {{ job.location }} · <span class="timeline__dates">{{ job.start }} – {{ job.end }}</span>
+            </p>
+          </div>
+          <ul class="timeline__bullets">
+            @for (bullet of job.bullets; track bullet) {
+              <li>{{ bullet }}</li>
+            }
+          </ul>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="section__title" appReveal>Skills</h2>
+    <div class="skills">
+      @for (group of cv.skills; track group.name; let i = $index) {
+        <div class="skills__group" appReveal [revealDelay]="i * 80">
+          <h3 class="skills__name">{{ group.name }}</h3>
+          <ul class="skills__items">
+            @for (item of group.items; track item) {
+              <li class="chip">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="education-title">
+    <h2 id="education-title" class="section__title" appReveal>Education</h2>
+    <div class="education">
+      @for (edu of cv.education; track edu.degree) {
+        <article class="education__card" appReveal>
+          <h3>{{ edu.degree }}</h3>
+          <p class="education__meta">{{ edu.school }} · {{ edu.start }} – {{ edu.end }}</p>
+          <p class="education__details">{{ edu.details }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="languages-title" appReveal>
+    <h2 id="languages-title" class="section__title">Languages</h2>
+    <ul class="languages">
+      @for (lang of cv.languages; track lang) {
+        <li class="chip">{{ lang }}</li>
+      }
+    </ul>
+  </section>
+</div>

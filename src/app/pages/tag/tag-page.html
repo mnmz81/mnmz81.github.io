@@ -1,0 +1,17 @@
+<div class="container section">
+  <a class="tag__back" routerLink="/blog">← All posts</a>
+  <header class="tag__intro" appReveal>
+    <h1><span class="text-gradient">#{{ tag() }}</span></h1>
+    <p class="tag__count">{{ posts().length }} {{ posts().length === 1 ? 'post' : 'posts' }}</p>
+  </header>
+
+  @if (posts().length) {
+    <div class="tag__list">
+      @for (post of posts(); track post.slug; let i = $index) {
+        <app-post-card [post]="post" appReveal [revealDelay]="(i % 3) * 100" />
+      }
+    </div>
+  } @else {
+    <p class="tag__empty">No posts tagged “{{ tag() }}” yet.</p>
+  }
+</div>
