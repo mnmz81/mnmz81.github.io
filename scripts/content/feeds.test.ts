@@ -15,8 +15,8 @@ describe('buildRss', () => {
     expect(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).toBe(true);
     expect(xml).toContain('<title>Me &amp; Co</title>');
     expect(xml).toContain('<title>A &lt;b&gt; &amp; c</title>');
-    expect(xml).toContain('<link>https://example.dev/blog/a-post</link>');
-    expect(xml).toContain('<guid isPermaLink="true">https://example.dev/blog/a-post</guid>');
+    expect(xml).toContain('<link>https://example.dev/blog/a-post/</link>');
+    expect(xml).toContain('<guid isPermaLink="true">https://example.dev/blog/a-post/</guid>');
     expect(xml).toContain('<pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>');
     expect(xml).toContain('<category>ai</category>');
   });
@@ -32,7 +32,7 @@ describe('buildSitemap', () => {
   it('produces absolute URLs', () => {
     const xml = buildSitemap(['/', '/blog/a-post'], site.url);
     expect(xml).toContain('<loc>https://example.dev/</loc>');
-    expect(xml).toContain('<loc>https://example.dev/blog/a-post</loc>');
+    expect(xml).toContain('<loc>https://example.dev/blog/a-post/</loc>');
     expect(xml).toContain('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
   });
 });

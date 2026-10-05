@@ -1,6 +1,6 @@
 import { DOCUMENT, Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { SITE } from './site.config';
+import { SITE, pageUrl } from './site.config';
 
 export interface PageSeo {
   title: string;
@@ -28,7 +28,7 @@ export class SeoService {
 
   set(page: PageSeo): void {
     const title = formatTitle(page.title);
-    const url = SITE.url + page.path;
+    const url = pageUrl(page.path);
     const image = SITE.url + (page.image ?? SITE.defaultOgImage);
 
     this.titleService.setTitle(title);
