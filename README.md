@@ -66,10 +66,6 @@ date: 2026-10-05                # required, YYYY-MM-DD
 
 Pushes to `main` deploy to GitHub Pages. See [docs/deploy.md](docs/deploy.md) for first-time setup and a custom domain.
 
-## Before going live
-
-- [ ] Replace the profile photo: add `public/profile.jpg` and set `SITE.profileImage` in `src/app/core/site.config.ts`.
-
 ## Future features
 
 - Analytics: create a GoatCounter site and set `SITE.analytics.goatcounterCode` in `src/app/core/site.config.ts` (cookie-free page views; the code path already exists).
