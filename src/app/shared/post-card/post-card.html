@@ -1,10 +1,16 @@
 <article class="post-card">
-  <h3 class="post-card__title" [style.view-transition-name]="'post-title-' + post().slug">
-    <a [routerLink]="['/blog', post().slug]">{{ post().title }}</a>
-  </h3>
   <p class="post-card__meta">
-    <time [attr.datetime]="post().date">{{ post().date | date: 'mediumDate' : 'UTC' }}</time>
-    · {{ post().readingMinutes }} min read
+    <time [attr.datetime]="post().date">{{ post().date + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}</time>
+    <span aria-hidden="true">·</span>
+    <span>{{ post().readingMinutes }} min read</span>
   </p>
+  <h3 class="post-card__title" [style.view-transition-name]="'post-title-' + post().slug">
+    <a class="post-card__link" [routerLink]="['/blog', post().slug]">{{ post().title }}</a>
+  </h3>
   <p class="post-card__summary">{{ post().summary }}</p>
+  <ul class="post-card__tags" aria-label="Tags">
+    @for (tag of post().tags; track tag) {
+      <li><a class="chip" [routerLink]="['/blog/tags', tag]">#{{ tag }}</a></li>
+    }
+  </ul>
 </article>

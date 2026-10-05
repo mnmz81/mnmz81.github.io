@@ -1,1 +1,23 @@
-<section class="container"><h1>Blog</h1></section>
+<div class="container section">
+  <header class="blog__intro" appReveal>
+    <h1><span class="text-gradient">Blog</span></h1>
+    <p class="blog__lead">Notes on what I'm learning: AI engineering, Angular, algorithms from my M.Sc., and more.</p>
+  </header>
+
+  @if (index().posts.length) {
+    <nav class="tag-filter" aria-label="Filter by tag">
+      <a class="chip chip--active" routerLink="/blog" aria-current="page">All</a>
+      @for (t of index().tags; track t.tag) {
+        <a class="chip" [routerLink]="['/blog/tags', t.tag]">#{{ t.tag }} <span class="tag-filter__count">({{ t.count }})</span></a>
+      }
+    </nav>
+
+    <div class="blog__list">
+      @for (post of index().posts; track post.slug; let i = $index) {
+        <app-post-card [post]="post" appReveal [revealDelay]="(i % 3) * 100" />
+      }
+    </div>
+  } @else {
+    <p class="blog__empty">First posts are on the way. Follow the <a href="/rss.xml">RSS feed</a> to get them.</p>
+  }
+</div>
