@@ -24,7 +24,7 @@ export class RevealDirective {
 
     el.classList.add('reveal', 'reveal--pending');
     const delay = this.revealDelay();
-    if (delay > 0) el.style.transitionDelay = `${delay}ms`;
+    if (delay > 0) el.style.animationDelay = `${delay}ms`;
 
     this.observer = new win.IntersectionObserver(
       (entries) => {

@@ -1,18 +1,20 @@
 // Reveal on scroll (RevealDirective adds these classes in the browser only).
-.reveal {
-  transition:
-    opacity var(--duration-slow) var(--ease-out),
-    transform var(--duration-slow) var(--ease-out);
-}
-
 .reveal--pending {
   opacity: 0;
   transform: translateY(24px);
 }
 
 .reveal--visible {
-  opacity: 1;
-  transform: none;
+  // Animation (not transition) so the element's own transitions stay intact.
+  // `backwards` fill: once finished it no longer affects transform (hover lifts keep working).
+  animation: reveal-in var(--duration-slow) var(--ease-out) backwards;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 }
 
 // Route transitions (router: withViewTransitions()).
