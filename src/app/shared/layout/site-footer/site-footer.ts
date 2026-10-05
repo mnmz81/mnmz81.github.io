@@ -21,6 +21,6 @@ export class SiteFooter {
     { label: 'GitHub', href: SITE.social.github, icon: 'github', external: true },
     { label: 'LinkedIn', href: SITE.social.linkedin, icon: 'linkedin', external: true },
     { label: 'Email', href: SITE.social.email, icon: 'email', external: false },
-    { label: 'RSS feed', href: '/rss.xml', icon: 'rss', external: false },
+    ...(SITE.features.blog ? [{ label: 'RSS feed', href: '/rss.xml', icon: 'rss' as const, external: false }] : []),
   ];
 }

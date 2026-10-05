@@ -9,6 +9,8 @@ export interface BuildOptions {
   contentDir: string;
   outDir: string;
   includeDrafts: boolean;
+  /** False skips content/blog entirely (blog hidden). Default true. */
+  includePosts?: boolean;
 }
 
 export interface BuildResult {
@@ -35,13 +37,13 @@ function countTags(posts: PostMeta[]): TagCount[] {
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
 
-export async function buildContent({ contentDir, outDir, includeDrafts }: BuildOptions): Promise<BuildResult> {
+export async function buildContent({ contentDir, outDir, includeDrafts, includePosts = true }: BuildOptions): Promise<BuildResult> {
   const render = await createRenderer();
   const errors: string[] = [];
   const posts: Post[] = [];
   const projects: Project[] = [];
 
-  for (const file of markdownFiles(join(contentDir, 'blog'))) {
+  for (const file of includePosts ? markdownFiles(join(contentDir, 'blog')) : []) {
     try {
       const { data, content } = matter(readFileSync(file, 'utf8'));
       const { draft, ...fm } = postFrontmatter.parse(data);

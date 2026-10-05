@@ -12,7 +12,11 @@
       <p class="hero__tagline hero__line" style="--i: 3">{{ cv.tagline }}</p>
 
       <div class="hero__actions hero__line" style="--i: 4">
-        <a class="btn btn--primary" routerLink="/blog">Read the blog</a>
+        @if (site.features.blog) {
+          <a class="btn btn--primary" routerLink="/blog">Read the blog</a>
+        } @else {
+          <a class="btn btn--primary" routerLink="/projects">See my projects</a>
+        }
         <a class="btn btn--ghost" routerLink="/about">About me</a>
       </div>
 

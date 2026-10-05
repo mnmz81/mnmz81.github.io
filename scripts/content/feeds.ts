@@ -46,15 +46,10 @@ export function buildRss(posts: PostMeta[], site: FeedSite): string {
   ].join('\n');
 }
 
-export function sitePaths(index: ContentIndex): string[] {
-  return [
-    '/',
-    '/about',
-    '/projects',
-    '/blog',
-    ...index.posts.map((p) => `/blog/${p.slug}`),
-    ...index.tags.map((t) => `/blog/tags/${t.tag}`),
-  ];
+export function sitePaths(index: ContentIndex, includeBlog = true): string[] {
+  const pages = ['/', '/about', '/projects'];
+  if (!includeBlog) return pages;
+  return [...pages, '/blog', ...index.posts.map((p) => `/blog/${p.slug}`), ...index.tags.map((t) => `/blog/tags/${t.tag}`)];
 }
 
 export function buildSitemap(paths: string[], siteUrl: string): string {
