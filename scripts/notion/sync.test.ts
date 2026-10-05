@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
@@ -51,5 +51,20 @@ describe('runSync', () => {
 
     await expect(runSync({ source, download: async () => undefined, contentDir, publicDir })).rejects.toThrow(/bad/);
     expect(existsSync(join(contentDir, 'blog', 'good-one.md'))).toBe(true);
+  });
+
+  it('rejects a page whose slug is empty without touching existing images', async () => {
+    const source: NotionSource = {
+      listPublished: async () => [blogPage('he', 'שלום עולם')],
+      pageMarkdown: async () => 'Body',
+    };
+    const { contentDir, publicDir } = dirs();
+    const existing = join(publicDir, 'images', 'other', 'x.png');
+    mkdirSync(join(publicDir, 'images', 'other'), { recursive: true });
+    writeFileSync(existing, 'png');
+
+    await expect(runSync({ source, download: async () => undefined, contentDir, publicDir })).rejects.toThrow(/Slug/);
+    expect(existsSync(existing)).toBe(true);
+    expect(existsSync(join(contentDir, 'blog', '.md'))).toBe(false);
   });
 });

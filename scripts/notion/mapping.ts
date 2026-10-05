@@ -32,6 +32,7 @@ export interface ImageDownload {
 
 const IMAGE_EXT = /^\.(png|jpe?g|gif|webp|svg|avif)$/;
 const DEFAULT_PROJECT_ORDER = 99;
+const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 export function slugify(value: string): string {
   return value
@@ -61,10 +62,14 @@ export function readEntry(page: NotionPageLike): NotionEntry {
   const title = text(p['Title']).trim();
   const date = day(p['Date']);
   if (!date) throw new Error(`Notion page ${page.id} (${title}): Date is required`);
+  const slug = slugify(text(p['Slug']) || title);
+  if (!KEBAB.test(slug)) {
+    throw new Error(`Notion page ${page.id} (${title}): Slug "${slug}" is empty or invalid; set the Slug property to kebab-case (e.g. my-post)`);
+  }
   return {
     id: page.id,
     type,
-    slug: slugify(text(p['Slug']) || title),
+    slug,
     title,
     summary: text(p['Summary']).trim(),
     date,
