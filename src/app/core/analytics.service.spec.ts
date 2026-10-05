@@ -56,4 +56,22 @@ describe('AnalyticsService', () => {
     await router.navigateByUrl('/about');
     expect(count).toHaveBeenLastCalledWith({ path: '/about' });
   });
+
+  it('strips query and fragment and skips fragment-only navigations', async () => {
+    const router = setup('moris');
+    const count = vi.fn();
+    (window as { goatcounter?: unknown }).goatcounter = { count };
+    script()!.dispatchEvent(new Event('load'));
+
+    await router.navigateByUrl('/blog/post?ref=x#intro');
+    expect(count).toHaveBeenCalledTimes(1);
+    expect(count).toHaveBeenLastCalledWith({ path: '/blog/post' });
+
+    await router.navigateByUrl('/blog/post#section-2');
+    expect(count).toHaveBeenCalledTimes(1);
+
+    await router.navigateByUrl('/about');
+    expect(count).toHaveBeenCalledTimes(2);
+    expect(count).toHaveBeenLastCalledWith({ path: '/about' });
+  });
 });
