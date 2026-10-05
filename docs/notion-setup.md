@@ -10,7 +10,7 @@ Markdown in `content/` is the source of truth. Notion is optional: write there, 
    | Property | Type | Notes |
    |---|---|---|
    | Title | Title | Post or project title |
-   | Slug | Text | Optional; defaults to the title in kebab-case |
+   | Slug | Text | Optional for Latin titles (defaults to the title in kebab-case). **Required** when the title is not Latin (e.g. Hebrew): without it the sync rejects the page |
    | Type | Select | Options: `Blog`, `Project` |
    | Status | Status | Options include `Draft` and `Published`; only `Published` syncs |
    | Tags | Multi-select | Blog tags (converted to kebab-case) |
@@ -33,3 +33,8 @@ Markdown in `content/` is the source of truth. Notion is optional: write there, 
 - From GitHub: Actions → "Notion sync" → Run workflow → review and merge the PR.
 
 The page body becomes the post body; images are downloaded into `public/images/<slug>/`. The sync never deletes files: to unpublish, delete `content/blog/<slug>.md` (and its images) in the repo.
+
+## Authoring notes
+
+- Use **Heading 2** and **Heading 3** in Notion. Heading 1 would create a second `<h1>` on the page and is left out of the table of contents.
+- PRs opened by the "Notion sync" workflow use `GITHUB_TOKEN`, and GitHub does not trigger other workflows for such PRs, so CI does not run on them automatically. The Deploy run on `main` after merge runs all tests; to get CI on the PR first, close and reopen it.

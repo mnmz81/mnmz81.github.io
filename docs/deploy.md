@@ -19,7 +19,7 @@ The site deploys to GitHub Pages on every push to `main` (`.github/workflows/dep
 
 1. Buy a domain (e.g. `moriszakay.dev`).
 2. Create `public/CNAME` containing just the domain, e.g. `moriszakay.dev`.
-3. In `src/app/core/site.config.ts` set `url: 'https://moriszakay.dev'` (canonical URLs, sitemap, RSS and OG images use it).
+3. In `src/app/core/site.config.ts` set `url: 'https://moriszakay.dev'` (canonical URLs, sitemap, RSS and OG images use it). Also update the `Sitemap:` line in `public/robots.txt` to the same domain.
 4. DNS at your registrar:
    - Apex domain: `A` records → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (and optionally `AAAA` → `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`).
    - `www` subdomain: `CNAME` → `mnmz81.github.io`.
