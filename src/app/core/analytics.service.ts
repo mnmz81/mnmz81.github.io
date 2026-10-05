@@ -22,6 +22,7 @@ export class AnalyticsService {
   private readonly code = inject(GOATCOUNTER_CODE);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private pending: string[] = [];
+  private lastPath: string | null = null;
 
   init(): void {
     if (!this.isBrowser || !this.code) return;
@@ -39,7 +40,14 @@ export class AnalyticsService {
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe((event) => this.track(event.urlAfterRedirects));
+      
+      .subscribe((event) => {
+        // Strip query and fragment; fragment-only navigations (TOC anchors) are not page views.
+        const path = event.urlAfterRedirects.split(/[?#]/)[0];
+        if (path === this.lastPath) return;
+        this.lastPath = path;
+        this.track(path);
+      });
   }
 
   private track(path: string): void {
