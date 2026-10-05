@@ -1,1 +1,122 @@
-// Article body styles. Implemented in Task 08.
+// Article body (rendered Markdown). Global because [innerHTML] content is outside view encapsulation.
+.prose {
+  max-width: var(--prose-max);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote,
+  pre,
+  table,
+  figure {
+    margin: 0 0 var(--space-5);
+  }
+
+  h2 {
+    margin-top: var(--space-7);
+  }
+
+  h3 {
+    margin-top: var(--space-6);
+  }
+
+  a {
+    font-weight: 500;
+    text-decoration-thickness: 1px;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: var(--space-5);
+  }
+
+  li + li {
+    margin-top: var(--space-2);
+  }
+
+  blockquote {
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--color-accent);
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  :not(pre) > code {
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  img {
+    border-radius: var(--radius-md);
+  }
+
+  hr {
+    margin-block: var(--space-7);
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+}
+
+// Shiki dual theme: spans carry --shiki-light / --shiki-dark variables (Task 01).
+.prose pre.shiki {
+  background-color: var(--shiki-light-bg);
+}
+
+.prose pre.shiki span {
+  color: var(--shiki-light);
+}
+
+@mixin shiki-dark {
+  .prose pre.shiki {
+    background-color: var(--shiki-dark-bg);
+  }
+
+  .prose pre.shiki span {
+    color: var(--shiki-dark);
+  }
+}
+
+:root[data-theme='dark'] {
+  @include shiki-dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include shiki-dark;
+  }
+}

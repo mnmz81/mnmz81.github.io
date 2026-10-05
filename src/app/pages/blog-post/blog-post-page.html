@@ -1,1 +1,50 @@
-<article class="container"><h1>{{ post().title }}</h1></article>
+<article class="post container">
+  <a class="post__back" routerLink="/blog">← All posts</a>
+
+  <header class="post__header">
+    <p class="post__meta">
+      <time [attr.datetime]="post().date">{{ post().date + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ post().readingMinutes }} min read</span>
+      @if (post().updated; as updated) {
+        <span aria-hidden="true">·</span>
+        <span>Updated <time [attr.datetime]="updated">{{ updated + 'T00:00:00Z' | date: 'mediumDate' : 'UTC' }}</time></span>
+      }
+    </p>
+    <h1 class="post__title" [style.view-transition-name]="'post-title-' + post().slug">{{ post().title }}</h1>
+    <p class="post__summary">{{ post().summary }}</p>
+    <ul class="post__tags" aria-label="Tags">
+      @for (tag of post().tags; track tag) {
+        <li><a class="chip" [routerLink]="['/blog/tags', tag]">#{{ tag }}</a></li>
+      }
+    </ul>
+  </header>
+
+  <ng-template #tocList>
+    <ol class="toc__list">
+      @for (item of post().toc; track item.id) {
+        <li>
+          <a class="toc__link" [class.toc__link--sub]="item.depth === 3" [routerLink]="[]" [fragment]="item.id">{{ item.text }}</a>
+        </li>
+      }
+    </ol>
+  </ng-template>
+
+  <div class="post__layout" [class.post__layout--with-toc]="post().toc.length > 0">
+    @if (post().toc.length) {
+      <details class="toc toc--mobile">
+        <summary>On this page</summary>
+        <ng-container [ngTemplateOutlet]="tocList" />
+      </details>
+    }
+
+    <div class="prose" [innerHTML]="body()"></div>
+
+    @if (post().toc.length) {
+      <nav class="toc toc--desktop" aria-label="On this page">
+        <p class="toc__title">On this page</p>
+        <ng-container [ngTemplateOutlet]="tocList" />
+      </nav>
+    }
+  </div>
+</article>
