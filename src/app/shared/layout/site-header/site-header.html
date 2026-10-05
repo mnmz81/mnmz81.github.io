@@ -1,0 +1,39 @@
+<header class="site-header" [class.site-header--open]="menuOpen()">
+  <div class="container site-header__inner">
+    <a class="site-header__brand" routerLink="/" (click)="closeMenu()">
+      <span class="site-header__logo" aria-hidden="true">MZ</span>
+      <span class="site-header__name">Moris Maor Zakay</span>
+    </a>
+
+    <button
+      type="button"
+      class="site-header__menu-btn"
+      #menuButton
+      aria-controls="site-nav"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="toggleMenu()"
+    >
+      <span class="visually-hidden">Menu</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        @if (menuOpen()) {
+          <path d="M6 6l12 12M18 6L6 18" />
+        } @else {
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        }
+      </svg>
+    </button>
+
+    <nav id="site-nav" class="site-header__nav" aria-label="Main">
+      <ul class="site-header__links">
+        @for (link of links; track link.path) {
+          <li>
+            <a [routerLink]="link.path" routerLinkActive="is-active" ariaCurrentWhenActive="page" (click)="closeMenu()">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+      <app-theme-toggle />
+    </nav>
+  </div>
+</header>

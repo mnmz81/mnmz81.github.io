@@ -1,0 +1,23 @@
+.tag__back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: var(--space-4);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tag__intro {
+  margin-bottom: var(--space-6);
+}
+
+.tag__count,
+.tag__empty {
+  color: var(--color-muted);
+}
+
+.tag__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+  gap: var(--space-5);
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "building-agents-with-google-adk",
+  "title": "Building agents with Google ADK",
+  "summary": "What I learned shipping an agentic AI feature to production: tools, skills, streaming and keeping costs down.",
+  "date": "2026-09-20",
+  "tags": ["ai", "agents"],
+  "readingMinutes": 6,
+  "html": "<p>Notes from shipping an agent to enterprise customers.</p>\n<h2 id=\"tools-and-skills\">Tools and skills</h2>\n<p>Small, well-described tools beat one giant tool.</p>",
+  "toc": [{ "id": "tools-and-skills", "text": "Tools and skills", "depth": 2 }]
+}
