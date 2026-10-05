@@ -26,11 +26,11 @@ describe('HomePage', () => {
     expect(el.querySelector('.hero__photo')?.getAttribute('alt')).toBe(`Portrait of ${CV.name}`);
   });
 
-  it('links to the blog and the CV download', async () => {
+  it('links to the blog and the about page, with no CV download', async () => {
     const el = await render();
     expect(el.querySelector('a[href="/blog"]')).not.toBeNull();
-    const cv = el.querySelector('a[href="/cv.pdf"]');
-    expect(cv?.hasAttribute('download')).toBe(true);
+    expect(el.querySelector('.hero__actions a[href="/about"]')).not.toBeNull();
+    expect(el.querySelector('a[download]')).toBeNull();
   });
 
   it('renders the three highlights', async () => {

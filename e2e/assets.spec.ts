@@ -1,11 +1,5 @@
 import { expect, test } from '@playwright/test';
 
-test('CV PDF is downloadable', async ({ request }) => {
-  const res = await request.get('/cv.pdf');
-  expect(res.status()).toBe(200);
-  expect(res.headers()['content-type']).toContain('application/pdf');
-});
-
 test('RSS feed lists posts', async ({ request }) => {
   const res = await request.get('/rss.xml');
   expect(res.status()).toBe(200);
