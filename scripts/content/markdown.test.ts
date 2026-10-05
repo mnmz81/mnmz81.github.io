@@ -41,6 +41,15 @@ describe('markdown renderer', () => {
     expect(html).toContain('--shiki-dark:');
   });
 
+  it('highlights fences regardless of language case and for tsx/sh aliases', () => {
+    const tokenColors = (html: string) => new Set(html.match(/--shiki-light:#[0-9A-Fa-f]{6}/g)).size;
+    const plain = tokenColors(render('```nope\nconst a = 1;\n```\n').html);
+    for (const lang of ['TS', 'Ts', 'tsx', 'jsx', 'sh', 'zsh']) {
+      const { html } = render('```' + lang + '\nconst a = 1;\n```\n');
+      expect(tokenColors(html), lang).toBeGreaterThan(plain);
+    }
+  });
+
   it('falls back to plain text for unknown languages', () => {
     const { html } = render('```nope\nhello\n```\n');
     expect(html).toContain('<pre class="shiki');

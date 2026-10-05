@@ -13,7 +13,7 @@ export interface RenderedMarkdown {
 
 export type Renderer = (markdown: string) => RenderedMarkdown;
 
-const LANGS = ['ts', 'js', 'json', 'html', 'css', 'scss', 'bash', 'shell', 'python', 'yaml', 'markdown', 'diff', 'sql', 'java'];
+const LANGS = ['ts', 'js', 'json', 'html', 'css', 'scss', 'bash', 'shell', 'python', 'yaml', 'markdown', 'diff', 'sql', 'java', 'tsx', 'jsx', 'sh', 'zsh'];
 const THEMES = { light: 'github-light', dark: 'github-dark' } as const;
 const WORDS_PER_MINUTE = 200;
 
@@ -34,12 +34,14 @@ export async function createRenderer(): Promise<Renderer> {
     html: false,
     linkify: true,
     typographer: true,
-    highlight: (code, lang) =>
-      highlighter.codeToHtml(code, {
-        lang: loaded.has(lang) ? lang : 'text',
+    highlight: (code, lang) => {
+      const normalized = lang.trim().toLowerCase();
+      return highlighter.codeToHtml(code, {
+        lang: loaded.has(normalized) ? normalized : 'text',
         themes: THEMES,
         defaultColor: false,
-      }),
+      });
+    },
   });
 
   md.use(anchor, { level: [2, 3], slugify: (s: string) => slugger.slug(s), tabIndex: false });
