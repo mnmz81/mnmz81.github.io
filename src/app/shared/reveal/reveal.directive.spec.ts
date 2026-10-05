@@ -61,10 +61,10 @@ describe('RevealDirective', () => {
     expect(disconnect).toHaveBeenCalled();
   });
 
-  it('applies the delay as a transition delay', async () => {
+  it('applies the delay as an animation delay', async () => {
     stubEnvironment({ top: 5000 });
     const { el } = await render(200);
-    expect(el.style.transitionDelay).toBe('200ms');
+    expect(el.style.animationDelay).toBe('200ms');
   });
 
   it('never hides elements already in the viewport', async () => {
