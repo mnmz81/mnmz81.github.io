@@ -17,6 +17,14 @@
   }
 }
 
+// Print: show sections that were never scrolled into view.
+@media print {
+  .reveal--pending {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 // Route transitions (router: withViewTransitions()).
 // Post titles morph between card and page via view-transition-name: post-title-<slug>.
 .site-header {
