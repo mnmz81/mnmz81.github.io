@@ -181,7 +181,7 @@ export const SITE = {
   defaultOgImage: '/og/default.png',
   social: {
     github: 'https://github.com/mnmz81',
-    linkedin: 'https://www.linkedin.com/in/moris-maor-zakay',
+    linkedin: 'https://www.linkedin.com/in/moris-maor-zakay-0974189b',
     email: 'mailto:moriszakay42@gmail.com',
   },
   analytics: {
