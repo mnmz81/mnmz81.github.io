@@ -41,11 +41,11 @@ export interface Cv {
 
 export const CV: Cv = {
   name: 'Moris Maor Zakay',
-  headline: 'Software Engineer · Full-Stack & AI Application Development',
-  tagline: 'I build full-stack products and production agentic AI features, and write about what I learn along the way.',
-  location: 'Upper Galilee, Israel (open to hybrid)',
+  headline: 'Software Engineer · Angular & AI Agents',
+  tagline: 'I build enterprise product features in Angular and production LLM agents in Python.',
+  location: 'Gadot, Israel (open to hybrid)',
   summary:
-    'Software engineer with 5+ years building enterprise product features at BMC Software (Control-M), including designing and shipping agentic AI capabilities in production. Built LLM-powered features with Google ADK and LiteLLM on AWS Bedrock (Claude), and improved their cost, latency, and reliability through prompt engineering, multi-agent orchestration, and LLM evaluation pipelines. Full-stack across Angular/TypeScript and Python. Pursuing an M.Sc. in Computer Science (ML focus).',
+    'Software engineer with 5+ years building enterprise product features at BMC Software (Control-M). My work splits between Angular frontend and production LLM agents in Python (Google ADK, LiteLLM, AWS Bedrock with Claude), where I make agents more accurate, faster, and cheaper through prompt engineering, multi-agent orchestration, and evaluation pipelines. I also fix bugs and ship new functionality in Java services. Pursuing an M.Sc. in Computer Science (ML focus).',
   experience: [
     {
       role: 'Software Engineer (Product Developer)',
@@ -54,12 +54,13 @@ export const CV: Cv = {
       start: '2021',
       end: 'Present',
       bullets: [
-        'Designed and shipped agentic AI capabilities for enterprise customers, built with Google ADK and LiteLLM on AWS Bedrock (Claude); owned prompt design, tool and skill definitions, and streaming responses end to end.',
-        'Significantly reduced token consumption, latency, and API cost through prompt optimization and sub-agent orchestration with isolated context.',
-        'Built an LLM evaluation pipeline with LLM-as-judge scoring and RAG-based retrieval, improving response quality and catching regressions before release.',
-        'Developed and maintained Angular 20+ features (Signals, RxJS, Nx) with Jest unit tests and Playwright e2e coverage, integrated with Python services via REST APIs.',
-        'Containerized services with Docker and authored CI/CD pipelines in Jenkins and GitHub Actions, streamlining build and deployment.',
-        'Owned features end to end with product and UX across global sites; wrote technical design docs, mentored and onboarded new developers, and served as a core code reviewer.',
+        'Develop and maintain Angular 20+ product features (standalone components, Signals, RxJS, Nx monorepo) with Jest unit tests and Playwright e2e coverage.',
+        'Build and continuously improve production LLM agents for enterprise customers in Python with Google ADK and LiteLLM on AWS Bedrock (Claude); own prompt design, tool and skill definitions, and streaming responses.',
+        'Improved agent accuracy, latency, and token cost by refining prompts and splitting work across sub-agents with isolated context.',
+        'Built an LLM evaluation pipeline (LLM-as-judge scoring, RAG-based retrieval) to measure answer quality and catch regressions before release.',
+        'Fix bugs and deliver new functionality in Java backend services.',
+        'Containerized services with Docker and maintain CI/CD pipelines in Jenkins and GitHub Actions.',
+        'Own features end to end with product and UX across global sites; write technical design docs, mentor and onboard new developers, and serve as a core code reviewer.',
       ],
     },
     {
@@ -92,11 +93,11 @@ export const CV: Cv = {
     },
     {
       name: 'Frontend',
-      items: ['Angular 20+ (standalone, Signals)', 'TypeScript', 'RxJS', 'Nx monorepo', 'SCSS', 'Bootstrap', 'Jest', 'Playwright'],
+      items: ['Angular 20+ (standalone, Signals)', 'RxJS', 'Nx monorepo', 'SCSS', 'Bootstrap', 'Jest', 'Playwright'],
     },
     {
-      name: 'DevOps / Cloud',
-      items: ['Docker & docker-compose', 'Jenkins', 'GitHub Actions', 'AWS Bedrock', 'Git', 'GitHub', 'Bitbucket'],
+      name: 'DevOps / Tools',
+      items: ['Docker & docker-compose', 'Jenkins', 'GitHub Actions', 'Git', 'GitHub', 'Bitbucket'],
     },
     {
       name: 'Practices',
@@ -132,16 +133,16 @@ export const CV: Cv = {
   languages: ['Hebrew (native)', 'English (fluent)'],
   highlights: [
     {
-      title: 'Agentic AI in production',
-      description: 'Designed and shipped production agentic AI capabilities with Google ADK and LiteLLM on AWS Bedrock (Claude).',
+      title: 'Angular product features',
+      description: 'Enterprise UI in Angular 20+ with Signals, RxJS and Nx, covered by Jest unit tests and Playwright e2e.',
     },
     {
-      title: 'Faster, cheaper LLM features',
-      description: 'Cut token use, latency and API cost through prompt optimization and sub-agent orchestration with isolated context.',
+      title: 'LLM agents in production',
+      description: 'Build and improve Python agents with Google ADK and LiteLLM on AWS Bedrock (Claude): prompts, tools, sub-agents.',
     },
     {
       title: 'LLM evaluation pipeline',
-      description: 'Built LLM-as-judge scoring with RAG-based retrieval to raise response quality and catch regressions before release.',
+      description: 'LLM-as-judge scoring with RAG-based retrieval to measure agent quality and catch regressions before release.',
     },
   ],
 };

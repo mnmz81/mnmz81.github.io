@@ -1,6 +1,6 @@
 # Moris Maor Zakay — personal site
 
-Personal site and blog: a statically generated Angular app (SSG, prerendered to plain HTML) with a Markdown content pipeline. Posts and projects live as Markdown in `content/`; a build step turns them into JSON, OG images, RSS and a sitemap.
+Personal site: a statically generated Angular app (SSG, prerendered to plain HTML) with a Markdown content pipeline. Posts and projects live as Markdown in `content/`; a build step turns them into JSON, OG images, RSS and a sitemap.
 
 Requires Node 24 (`.nvmrc`).
 
