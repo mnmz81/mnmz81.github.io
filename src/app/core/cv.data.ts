@@ -54,7 +54,7 @@ export const CV: Cv = {
       start: '2021',
       end: 'Present',
       bullets: [
-        'Designed and shipped agentic AI capabilities in Control-M for enterprise customers, built with Google ADK and LiteLLM on AWS Bedrock (Claude); owned prompt design, tool and skill definitions, and streaming responses end to end.',
+        'Designed and shipped agentic AI capabilities for enterprise customers, built with Google ADK and LiteLLM on AWS Bedrock (Claude); owned prompt design, tool and skill definitions, and streaming responses end to end.',
         'Significantly reduced token consumption, latency, and API cost through prompt optimization and sub-agent orchestration with isolated context.',
         'Built an LLM evaluation pipeline with LLM-as-judge scoring and RAG-based retrieval, improving response quality and catching regressions before release.',
         'Developed and maintained Angular 20+ features (Signals, RxJS, Nx) with Jest unit tests and Playwright e2e coverage, integrated with Python services via REST APIs.',
@@ -133,7 +133,7 @@ export const CV: Cv = {
   highlights: [
     {
       title: 'Agentic AI in production',
-      description: 'Designed and shipped agentic AI capabilities in Control-M with Google ADK and LiteLLM on AWS Bedrock (Claude).',
+      description: 'Designed and shipped production agentic AI capabilities with Google ADK and LiteLLM on AWS Bedrock (Claude).',
     },
     {
       title: 'Faster, cheaper LLM features',
