@@ -3,7 +3,7 @@ export const SITE = {
   url: 'https://mnmz81.github.io',
   title: 'Moris Maor Zakay',
   description:
-    'Software engineer building full-stack products and agentic AI applications. Notes on AI, Angular, and what I learn along the way.',
+    'Software engineer building enterprise product features in Angular and production LLM agents in Python.',
   author: 'Moris Maor Zakay',
   locale: 'en',
   profileImage: '/profile.jpg',

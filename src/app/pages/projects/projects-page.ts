@@ -17,7 +17,7 @@ export class ProjectsPage {
   constructor() {
     inject(SeoService).set({
       title: 'Projects',
-      description: "Things I've built — side projects and open source.",
+      description: "Things I've built: side projects and university work.",
       path: '/projects',
     });
   }
