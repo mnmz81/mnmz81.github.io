@@ -97,7 +97,7 @@ export const CV: Cv = {
     },
     {
       name: 'DevOps / Tools',
-      items: ['Docker & docker-compose', 'Jenkins', 'GitHub Actions', 'Git', 'GitHub', 'Bitbucket'],
+      items: ['Linux', 'Docker & docker-compose', 'Jenkins', 'GitHub Actions', 'Git', 'GitHub', 'Bitbucket'],
     },
     {
       name: 'Practices',
