@@ -4,6 +4,6 @@ summary: University ML project. A face / not-face image classifier built without
 tech: [MATLAB, Machine Learning, Neural Networks]
 repo: https://github.com/mnmz81/Artificial-Neural-Network
 featured: false
-order: 5
+order: 6
 date: 2020-09-11
 ---
