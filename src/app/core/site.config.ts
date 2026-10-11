@@ -12,6 +12,8 @@ export const SITE = {
     // Off: no /blog routes, nav link, home posts, RSS or blog sitemap entries. Flip to true to publish the blog.
     blog: false as boolean,
   },
+  // External learning blog (Loom), linked from the home hero.
+  blogUrl: 'https://mnmz81.github.io/loom/',
   social: {
     github: 'https://github.com/mnmz81',
     linkedin: 'https://www.linkedin.com/in/moris-maor-zakay-0974189b',
