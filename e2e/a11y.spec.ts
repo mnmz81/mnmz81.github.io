@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 import { SITE } from '../src/app/core/site.config';
 
 const BLOG_PAGES = ['/blog', '/blog/tags/angular', '/blog/angular-signals-in-practice'];
-const PAGES = ['/', '/about', '/projects', ...(SITE.features.blog ? BLOG_PAGES : []), '/404'];
+const PAGES = ['/', '/about', '/projects', '/accessibility', ...(SITE.features.blog ? BLOG_PAGES : []), '/404'];
 
 for (const theme of ['light', 'dark'] as const) {
   for (const path of PAGES) {

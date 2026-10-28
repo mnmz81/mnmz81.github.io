@@ -4,6 +4,12 @@ Personal site: a statically generated Angular app (SSG, prerendered to plain HTM
 
 Requires Node 24 (`.nvmrc`).
 
+After cloning, enable the pre-commit hook that blocks commits containing secrets (this repo is public):
+
+```bash
+git config core.hooksPath .githooks
+```
+
 ## Commands
 
 ```bash

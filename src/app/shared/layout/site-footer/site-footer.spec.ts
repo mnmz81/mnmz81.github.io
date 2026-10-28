@@ -1,10 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import { describe, expect, it } from 'vitest';
+import { provideRouter } from '@angular/router';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { SITE } from '../../../core/site.config';
 import { setBlogEnabled } from '../../../../testing/blog-flag';
 import { SiteFooter } from './site-footer';
 
 describe('SiteFooter', () => {
+  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter([])] }));
+
+  it('links to the accessibility statement', async () => {
+    const fixture = TestBed.createComponent(SiteFooter);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('.site-footer__link')?.getAttribute('href')).toBe('/accessibility');
+  });
+
   it('renders social links with accessible labels', async () => {
     const restore = setBlogEnabled(true);
     const fixture = TestBed.createComponent(SiteFooter);

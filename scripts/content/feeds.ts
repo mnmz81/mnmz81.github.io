@@ -47,7 +47,7 @@ export function buildRss(posts: PostMeta[], site: FeedSite): string {
 }
 
 export function sitePaths(index: ContentIndex, includeBlog = true): string[] {
-  const pages = ['/', '/about', '/projects'];
+  const pages = ['/', '/about', '/projects', '/accessibility'];
   if (!includeBlog) return pages;
   return [...pages, '/blog', ...index.posts.map((p) => `/blog/${p.slug}`), ...index.tags.map((t) => `/blog/tags/${t.tag}`)];
 }

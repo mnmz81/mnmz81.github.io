@@ -1,6 +1,8 @@
 <footer class="site-footer">
   <div class="container site-footer__inner">
-    <p class="site-footer__copy">© {{ year }} {{ author }}</p>
+    <p class="site-footer__copy">
+      © {{ year }} {{ author }} · <a class="site-footer__link" routerLink="/accessibility">Accessibility</a>
+    </p>
     <ul class="site-footer__social">
       @for (link of social; track link.label) {
         <li>

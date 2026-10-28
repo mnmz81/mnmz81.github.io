@@ -24,11 +24,11 @@ describe('buildRss', () => {
 
 describe('sitePaths', () => {
   it('lists static pages, posts and tags', () => {
-    expect(sitePaths(index)).toEqual(['/', '/about', '/projects', '/blog', '/blog/a-post', '/blog/tags/ai']);
+    expect(sitePaths(index)).toEqual(['/', '/about', '/projects', '/accessibility', '/blog', '/blog/a-post', '/blog/tags/ai']);
   });
 
   it('omits blog pages when the blog is off', () => {
-    expect(sitePaths(index, false)).toEqual(['/', '/about', '/projects']);
+    expect(sitePaths(index, false)).toEqual(['/', '/about', '/projects', '/accessibility']);
   });
 });
 

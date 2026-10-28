@@ -1,0 +1,39 @@
+<article class="container statement">
+  <header class="section">
+    <h1>Accessibility statement</h1>
+    <p class="statement__updated">Last updated <time [attr.datetime]="updated">{{ updated }}</time></p>
+  </header>
+
+  <section class="section" aria-labelledby="standard-title">
+    <h2 id="standard-title" class="section__title">Standard</h2>
+    <p>
+      This site aims to meet WCAG 2.1 level AA, the guidelines adopted by the Israeli standard IS 5568 (ת"י 5568).
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="done-title">
+    <h2 id="done-title" class="section__title">What was done</h2>
+    <ul class="statement__list">
+      <li>Every page works with the keyboard alone, starts with a "Skip to content" link and shows a visible focus ring.</li>
+      <li>Pages use semantic headings, landmarks and labelled links, so screen readers can navigate them.</li>
+      <li>Images have text alternatives; decorative icons are hidden from assistive technology.</li>
+      <li>Text contrast meets level AA in both the light and the dark theme.</li>
+      <li>Text can be zoomed to 200%, and the layout adapts to small screens.</li>
+      <li>Animations respect the "reduce motion" setting of your system.</li>
+      <li>Every page is checked automatically against WCAG 2.1 AA (axe-core) in both themes on each change.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="known-title">
+    <h2 id="known-title" class="section__title">Known limitations</h2>
+    <p>I am not aware of parts of the site that are not accessible. If you find one, please tell me.</p>
+  </section>
+
+  <section class="section" aria-labelledby="contact-title">
+    <h2 id="contact-title" class="section__title">Report a problem</h2>
+    <p>
+      If something on this site is hard to use, email me at <a [href]="email">{{ emailAddress }}</a>. Please include the
+      page address, what went wrong, and the browser or assistive technology you used. I will reply within 14 days.
+    </p>
+  </section>
+</article>
