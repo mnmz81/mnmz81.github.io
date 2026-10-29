@@ -33,6 +33,10 @@ export const routes: Routes = [
     resolve: { projects: projectsResolver },
   },
   ...(SITE.features.blog ? blogRoutes : []),
+  {
+    path: 'accessibility',
+    loadComponent: () => import('./pages/accessibility/accessibility-page').then((m) => m.AccessibilityPage),
+  },
   { path: '404', loadComponent: () => import('./pages/not-found/not-found-page').then((m) => m.NotFoundPage) },
   { path: '**', loadComponent: () => import('./pages/not-found/not-found-page').then((m) => m.NotFoundPage) },
 ];
