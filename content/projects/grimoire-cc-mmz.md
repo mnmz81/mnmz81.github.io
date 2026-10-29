@@ -4,6 +4,6 @@ summary: A domain-based plugin marketplace for Claude Code that consolidates cus
 tech: [Python, Shell, GitHub Actions, Claude Code]
 repo: https://github.com/mnmz81/grimoire-cc-mmz
 featured: true
-order: 2
+order: 3
 date: 2026-06-16
 ---

@@ -4,6 +4,6 @@ summary: "A multi-agent pipeline on Claude Code that takes a feature from brief 
 tech: [Claude Code, AI Agents, JavaScript, Python]
 repo: https://github.com/mnmz81/agent-flow-studio
 featured: false
-order: 5
+order: 1
 date: 2026-06-21
 ---
