@@ -17,6 +17,12 @@ describe('AccessibilityPage', () => {
     expect(text).toContain('IS 5568');
   });
 
+  it('isolates the Hebrew standard name so it renders right-to-left', async () => {
+    const he = (await render()).querySelector('bdi[lang="he"]');
+    expect(he?.getAttribute('dir')).toBe('rtl');
+    expect(he?.textContent).toBe('ת"י 5568');
+  });
+
   it('gives a contact email and an update date', async () => {
     const el = await render();
     expect(el.querySelector('a[href^="mailto:"]')?.getAttribute('href')).toBe(SITE.social.email);
