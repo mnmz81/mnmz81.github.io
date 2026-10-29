@@ -5,6 +5,6 @@ tech: [Angular, TypeScript, Nx, Vitest, Storybook, Playwright]
 repo: https://github.com/mushilu-san/Mushilu-San-UI
 url: https://mushilu-san.github.io/Mushilu-San-UI/
 featured: true
-order: 1
+order: 2
 date: 2026-06-06
 ---

@@ -4,6 +4,6 @@ summary: University operations-research project. Python collects real driving di
 tech: [IBM CPLEX, OPL, Python, Google Maps API]
 repo: https://github.com/mnmz81/Travelling-Salesman-Problem-CPLEX
 featured: false
-order: 5
+order: 7
 date: 2020-10-21
 ---

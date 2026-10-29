@@ -5,6 +5,6 @@ tech: [Angular, TypeScript, SCSS, Pagefind, Playwright, GitHub Actions]
 repo: https://github.com/mnmz81/loom
 url: https://mnmz81.github.io/loom/
 featured: true
-order: 4
+order: 5
 date: 2026-10-08
 ---
