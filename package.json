@@ -50,7 +50,7 @@
     "markdown-it-anchor": "^10.0.0",
     "notion-to-md": "^3.1.9",
     "prettier": "^3.8.1",
-    "satori": "^0.35.0",
+    "satori": "^0.63.2",
     "shiki": "^4.5.0",
     "tsx": "^4.23.15",
     "typescript": "~6.0.2",
