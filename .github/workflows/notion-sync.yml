@@ -11,17 +11,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       # @mushilu-san/ui is a private package of another owner: GITHUB_TOKEN cannot read it.
-      - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+      - uses: ./.github/actions/setup
+        with:
+          token: ${{ secrets.PACKAGES_READ_TOKEN }}
 
       - name: Pull published pages from Notion
         run: npm run sync:notion
@@ -33,7 +28,7 @@ jobs:
         run: npm run content
 
       - name: Open pull request
-        # Third-party action with write access: pinned to a commit SHA (v7.0.11).
+        # Third-party action with write access: pinned to a commit SHA (v8.1.1).
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           branch: notion-sync
