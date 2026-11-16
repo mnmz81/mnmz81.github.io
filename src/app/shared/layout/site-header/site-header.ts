@@ -6,6 +6,8 @@ import { ThemeToggle } from '../theme-toggle/theme-toggle';
 interface NavLink {
   label: string;
   path: string;
+  /** Absolute URL outside this site; opens in a new tab. */
+  external?: boolean;
 }
 
 @Component({
@@ -20,7 +22,8 @@ export class SiteHeader {
   protected readonly links: NavLink[] = [
     { label: 'About', path: '/about' },
     { label: 'Projects', path: '/projects' },
-    ...(SITE.features.blog ? [{ label: 'Blog', path: '/blog' }] : []),
+    // The built-in blog is off: Blog points at the external learning blog (Loom).
+    SITE.features.blog ? { label: 'Blog', path: '/blog' } : { label: 'Blog', path: SITE.blogUrl, external: true },
   ];
   protected readonly menuOpen = signal(false);
   private readonly menuButton = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');

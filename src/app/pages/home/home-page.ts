@@ -6,13 +6,13 @@ import { SeoService } from '../../core/seo.service';
 import { SITE } from '../../core/site.config';
 import { PostCard } from '../../shared/post-card/post-card';
 import { ProjectCard } from '../../shared/project-card/project-card';
-import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
 const LATEST_POSTS = 3;
+const FEATURED_PROJECTS = 3;
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, PostCard, ProjectCard, RevealDirective],
+  imports: [RouterLink, PostCard, ProjectCard],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +24,7 @@ export class HomePage {
   protected readonly cv = CV;
   protected readonly site = SITE;
   protected readonly latestPosts = computed(() => (SITE.features.blog ? this.index().posts.slice(0, LATEST_POSTS) : []));
-  protected readonly featuredProjects = computed(() => this.projects().filter((p) => p.featured));
+  protected readonly featuredProjects = computed(() => this.projects().filter((p) => p.featured).slice(0, FEATURED_PROJECTS));
 
   constructor() {
     inject(SeoService).set({

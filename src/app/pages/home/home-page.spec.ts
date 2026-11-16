@@ -24,18 +24,19 @@ describe('HomePage', () => {
   });
   afterEach(() => restoreBlog());
 
-  it('renders the hero with name, headline and tagline', async () => {
+  it('renders the hero with name, headline, tagline and facts', async () => {
     const el = await render();
     expect(el.querySelector('h1')?.textContent).toContain(CV.name);
     expect(el.textContent).toContain(CV.headline);
     expect(el.textContent).toContain(CV.tagline);
+    expect([...el.querySelectorAll('.hero__facts li')].map((li) => li.textContent)).toEqual(CV.facts);
     expect(el.querySelector('.hero__photo')?.getAttribute('alt')).toBe(`Portrait of ${CV.name}`);
   });
 
-  it('links to the blog and the about page, with no CV download', async () => {
+  it('offers contact first and the blog second, with no CV download', async () => {
     const el = await render();
-    expect(el.querySelector('a[href="/blog"]')).not.toBeNull();
-    expect(el.querySelector('.hero__actions a[href="/about"]')).not.toBeNull();
+    const actions = [...el.querySelectorAll('.hero__actions a')].map((a) => a.getAttribute('href'));
+    expect(actions).toEqual(['#contact', '/blog']);
     expect(el.querySelector('a[download]')).toBeNull();
   });
 
@@ -67,6 +68,12 @@ describe('HomePage', () => {
     const projects = [...FIXTURE_PROJECTS, { ...FIXTURE_PROJECTS[0], slug: 'hidden', featured: false }];
     const el = await render(FIXTURE_INDEX, projects);
     expect(el.querySelectorAll('app-project-card')).toHaveLength(2);
+  });
+
+  it('shows at most three featured projects', async () => {
+    const featured = ['a', 'b', 'c', 'd'].map((slug) => ({ ...FIXTURE_PROJECTS[0], slug, featured: true }));
+    const el = await render(FIXTURE_INDEX, featured);
+    expect(el.querySelectorAll('app-project-card')).toHaveLength(3);
   });
 
   it('sets the page title', async () => {

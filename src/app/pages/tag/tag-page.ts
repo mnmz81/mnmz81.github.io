@@ -3,11 +3,10 @@ import { RouterLink } from '@angular/router';
 import type { ContentIndex } from '../../core/content.models';
 import { SeoService } from '../../core/seo.service';
 import { PostCard } from '../../shared/post-card/post-card';
-import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
 @Component({
   selector: 'app-tag-page',
-  imports: [RouterLink, PostCard, RevealDirective],
+  imports: [RouterLink, PostCard],
   templateUrl: './tag-page.html',
   styleUrl: './tag-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

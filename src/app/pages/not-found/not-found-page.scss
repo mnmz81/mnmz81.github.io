@@ -1,13 +1,23 @@
 .not-found {
   display: grid;
-  justify-items: start;
-  gap: var(--space-4);
+  justify-items: center;
+  gap: var(--space-3);
   padding-block: var(--space-8);
+  text-align: center;
 }
 
 .not-found__code {
   margin: 0;
-  font-size: clamp(4rem, 15vw, 8rem);
-  font-weight: 800;
-  line-height: 1;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
 }
