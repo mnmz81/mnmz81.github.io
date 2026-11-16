@@ -17,7 +17,7 @@ describe('ProjectCard', () => {
     const el = await render(project);
     expect(el.querySelector('h3')?.textContent).toContain(project.title);
     expect(el.textContent).toContain(project.summary);
-    expect([...el.querySelectorAll('.chip')].map((c) => c.textContent?.trim())).toEqual(project.tech);
+    expect([...el.querySelectorAll('mui-chip')].map((c) => c.textContent?.trim())).toEqual(project.tech);
   });
 
   it('renders repo and live links with accessible names', async () => {

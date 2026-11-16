@@ -57,7 +57,8 @@ for (const [vpName, viewport] of Object.entries(VIEWPORTS)) {
         const visible = (el) => {
           const r = el.getBoundingClientRect();
           const s = getComputedStyle(el);
-          return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none';
+          // 1px boxes are visually hidden until focused (skip link).
+          return r.width > 1 && r.height > 1 && s.visibility !== 'hidden' && s.display !== 'none';
         };
         const targets = [...document.querySelectorAll('a, button, input, select, summary')].filter(visible);
         const small = targets

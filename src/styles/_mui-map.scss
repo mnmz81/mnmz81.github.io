@@ -1,0 +1,21 @@
+// Point Mushilu-San-UI semantic tokens at the site palette, instead of restyling its components.
+// Both selectors are (0,2,0) so they beat the library's own dark-theme rules; the --color-* values already switch by theme.
+:root[data-theme],
+:root:not([data-theme]) {
+  --mui-color-bg: var(--color-bg);
+  --mui-color-surface: var(--color-surface);
+  --mui-color-surface-raised: var(--color-surface-2);
+  --mui-color-border: var(--color-border);
+  --mui-color-border-strong: var(--color-border);
+  --mui-color-input-border: var(--color-border);
+  --mui-color-text: var(--color-text);
+  --mui-color-text-muted: var(--color-muted);
+  --mui-color-primary: var(--color-accent);
+  --mui-color-primary-hover: var(--color-accent);
+  --mui-color-primary-active: var(--color-accent);
+  --mui-color-primary-text: var(--color-accent-contrast);
+  --mui-color-primary-subtle: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg));
+  --mui-color-focus-ring: var(--color-accent);
+  --mui-font-sans: var(--font-sans);
+  --mui-font-mono: var(--font-mono);
+}

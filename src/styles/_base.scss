@@ -42,22 +42,3 @@ a {
 main:focus {
   outline: none;
 }
-
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--space-4);
-  z-index: 100;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: var(--space-2) var(--space-4);
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-
-  &:focus {
-    top: var(--space-4);
-  }
-}

@@ -6,14 +6,14 @@
   <p class="project-card__summary">{{ project().summary }}</p>
   <ul class="project-card__tech" aria-label="Technologies">
     @for (tech of project().tech; track tech) {
-      <li class="chip">{{ tech }}</li>
+      <li><mui-chip>{{ tech }}</mui-chip></li>
     }
   </ul>
   @if (project().repo || project().url) {
     <div class="project-card__links">
       @if (project().repo) {
         <a
-          class="btn btn--ghost"
+          muiButton variant="secondary"
           [href]="project().repo"
           target="_blank"
           rel="noopener noreferrer"
@@ -22,7 +22,7 @@
       }
       @if (project().url) {
         <a
-          class="btn btn--primary"
+          muiButton
           [href]="project().url"
           target="_blank"
           rel="noopener noreferrer"

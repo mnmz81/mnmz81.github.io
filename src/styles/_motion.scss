@@ -1,6 +1,6 @@
 // Route transitions (router: withViewTransitions()).
 // Post titles morph between card and page via view-transition-name: post-title-<slug>.
-.site-header {
+app-site-header {
   view-transition-name: site-header;
 }
 

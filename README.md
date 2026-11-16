@@ -10,6 +10,15 @@ After cloning, enable the pre-commit hook that blocks commits containing secrets
 git config core.hooksPath .githooks
 ```
 
+The UI components come from `@mushilu-san/ui`, a private package on GitHub Packages (`.npmrc`). npm needs a token with `read:packages` in `NODE_AUTH_TOKEN`; `scripts/with-node.sh` takes it from the `gh` login and selects Node 24:
+
+```bash
+gh auth refresh -s read:packages   # once
+./scripts/with-node.sh npm ci
+```
+
+CI reads the token from the `PACKAGES_READ_TOKEN` secret (Actions and Dependabot).
+
 ## Commands
 
 ```bash
