@@ -30,6 +30,8 @@ export interface Cv {
   name: string;
   headline: string;
   tagline: string;
+  /** Short facts shown under the home headline. */
+  facts: string[];
   location: string;
   summary: string;
   experience: Experience[];
@@ -43,6 +45,7 @@ export const CV: Cv = {
   name: 'Moris Maor Zakay',
   headline: 'Software Engineer · Angular & AI Agents',
   tagline: 'I build enterprise product features in Angular and production LLM agents in Python.',
+  facts: ['BMC Software (Control-M)', '5+ years', 'Gadot, Israel', 'M.Sc. Computer Science in progress'],
   location: 'Gadot, Israel (open to hybrid)',
   summary:
     'Software engineer with 5+ years building enterprise product features at BMC Software (Control-M). My work splits between Angular frontend and production LLM agents in Python (Google ADK, LiteLLM, AWS Bedrock with Claude), where I make agents more accurate, faster, and cheaper through prompt engineering, multi-agent orchestration, and evaluation pipelines. I also fix bugs and ship new functionality in Java services. Pursuing an M.Sc. in Computer Science (ML focus).',

@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { SITE } from '../../../core/site.config';
 import { setBlogEnabled } from '../../../../testing/blog-flag';
 import { SiteHeader } from './site-header';
 
@@ -30,13 +31,16 @@ describe('SiteHeader', () => {
     expect(el.querySelector('app-theme-toggle')).not.toBeNull();
   });
 
-  it('hides the Blog link when the blog is off', async () => {
+  it('points Blog at the external blog, in a new tab, when the built-in blog is off', async () => {
     const restore = setBlogEnabled(false);
     const fixture = TestBed.createComponent(SiteHeader);
     restore();
     await fixture.whenStable();
-    const hrefs = [...fixture.nativeElement.querySelectorAll('nav a')].map((a: Element) => a.getAttribute('href'));
-    expect(hrefs).toEqual(['/about', '/projects']);
+    const links: HTMLAnchorElement[] = [...fixture.nativeElement.querySelectorAll('nav a')];
+    expect(links.map((a) => a.getAttribute('href'))).toEqual(['/about', '/projects', SITE.blogUrl]);
+    expect(links[2].getAttribute('target')).toBe('_blank');
+    expect(links[2].getAttribute('rel')).toBe('noopener noreferrer');
+    expect(links[2].getAttribute('aria-label')).toBe('Blog (opens in a new tab)');
   });
 
   it('toggles the mobile menu and closes it on Escape', async () => {

@@ -1,6 +1,6 @@
 <div class="container section">
-  <header class="blog__intro" appReveal>
-    <h1><span class="text-gradient">Blog</span></h1>
+  <header class="blog__intro">
+    <h1>Blog</h1>
     <p class="blog__lead">Notes on what I'm learning: AI engineering, Angular, algorithms from my M.Sc., and more.</p>
   </header>
 
@@ -14,7 +14,7 @@
 
     <div class="blog__list">
       @for (post of index().posts; track post.slug; let i = $index) {
-        <app-post-card [post]="post" appReveal [revealDelay]="(i % 3) * 100" />
+        <app-post-card [post]="post" />
       }
     </div>
   } @else {

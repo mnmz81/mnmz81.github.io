@@ -27,9 +27,15 @@
       <ul class="site-header__links">
         @for (link of links; track link.path) {
           <li>
-            <a [routerLink]="link.path" routerLinkActive="is-active" ariaCurrentWhenActive="page" (click)="closeMenu()">
-              {{ link.label }}
-            </a>
+            @if (link.external) {
+              <a [href]="link.path" target="_blank" rel="noopener noreferrer" [attr.aria-label]="link.label + ' (opens in a new tab)'">
+                {{ link.label }}
+              </a>
+            } @else {
+              <a [routerLink]="link.path" routerLinkActive="is-active" ariaCurrentWhenActive="page" (click)="closeMenu()">
+                {{ link.label }}
+              </a>
+            }
           </li>
         }
       </ul>
