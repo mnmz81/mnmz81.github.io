@@ -10,12 +10,12 @@ test('theme toggle switches and persists across reloads', async ({ page, isMobil
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bg).toBe('rgb(11, 15, 25)');
+  expect(bg).toBe('rgb(15, 17, 21)');
 });
 
 test('follows the OS preference when nothing is stored', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bg).toBe('rgb(11, 15, 25)');
+  expect(bg).toBe('rgb(15, 17, 21)');
 });

@@ -26,17 +26,21 @@ describe('AboutPage', () => {
     });
   });
 
-  it('renders all skill groups as chips', async () => {
+  it('renders every skill group as a named list', async () => {
     const el = await render();
     const groups = el.querySelectorAll('.skills__group');
     expect(groups).toHaveLength(CV.skills.length);
-    expect(el.querySelectorAll('.skills .chip')).toHaveLength(CV.skills.flatMap((g) => g.items).length);
+    CV.skills.forEach((group, i) => {
+      expect(groups[i].querySelector('dt')?.textContent).toBe(group.name);
+      expect([...groups[i].querySelectorAll('li')].map((li) => li.textContent)).toEqual(group.items);
+    });
   });
 
-  it('renders education and languages', async () => {
-    const el = await render();
-    for (const edu of CV.education) expect(el.textContent).toContain(edu.degree);
-    for (const lang of CV.languages) expect(el.textContent).toContain(lang);
+  it('puts location, education and languages in the side column', async () => {
+    const side = (await render()).querySelector('.about__side');
+    expect(side?.textContent).toContain(CV.location);
+    for (const edu of CV.education) expect(side?.textContent).toContain(edu.degree);
+    for (const lang of CV.languages) expect(side?.textContent).toContain(lang);
   });
 
   it('does not offer a CV download', async () => {
