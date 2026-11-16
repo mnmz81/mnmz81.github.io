@@ -19,11 +19,11 @@
       </ul>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#contact">Contact</a>
+        <a muiButton href="#contact">Contact</a>
         @if (site.features.blog) {
-          <a class="btn btn--ghost" routerLink="/blog">Read the blog</a>
+          <a muiButton variant="secondary" routerLink="/blog">Read the blog</a>
         } @else {
-          <a class="btn btn--ghost" routerLink="/projects">Projects</a>
+          <a muiButton variant="secondary" routerLink="/projects">Projects</a>
         }
       </div>
     </div>

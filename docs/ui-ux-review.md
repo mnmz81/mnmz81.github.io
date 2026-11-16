@@ -200,3 +200,21 @@ Not done:
 - 13 (mobile menu backdrop and inert page): left for phase 2, where `mui-site-header` replaces the menu.
 - 14 on the projects page: mobile is 3,933px, slightly longer than before because of the two group headings. Compact rows for "More projects" were not built.
 - P2 smaller profile image source: dropped. The photo is now shown at 176px at most, so the 560px file is the right size for 3× screens.
+
+### Phase 2 — `@mushilu-san/ui` 2026.46.3 (2026-11-16, branch `feat/mushilu-ui`)
+
+Token bridge: `src/styles/_mui-map.scss` maps `--mui-color-*` and `--mui-font-*` onto the site's `--color-*` and `--font-*`. No library component is restyled.
+
+| Site piece | Now | Notes |
+|---|---|---|
+| Header, mobile menu | `mui-site-header` | Menu button, Escape, focus return and close-on-navigate are the library's. Closes finding 13. The theme toggle sits in the bar on mobile, not inside the menu. |
+| Nav links | `a[muiNavLink]` | `[active]` from the router's `isActive()` signal. |
+| Theme toggle | `button[muiButton]` + `mui-icon` (`sun`, `moon`) | |
+| Hero, 404, project card and footer links | `a[muiButton]` (`primary`, `secondary`) | The site's `.btn` CSS is deleted. |
+| Project tech labels | `mui-chip` | |
+| Skip link | `a[muiSkipLink]` | The site's `skipToMain` handler and `.skip-link` CSS are deleted. |
+| Footer icons | `mui-icon` (`github`, `mail`, `link`, `rss`) | `linkedin` is not in the library: registered with `provideMuiIcons()` in `app.config.ts`. Issue opened in the library. |
+
+Stays local: hero, experience timeline, About layout, project card box, footer layout, 404 layout. The blog pages (off) still use the site's `.chip` class.
+
+Not used, because the site has no such piece: dialog, accordion, pagination, form controls, badge.

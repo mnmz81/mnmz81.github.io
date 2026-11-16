@@ -1,6 +1,12 @@
 # Version-update PRs are off (open-pull-requests-limit: 0): scripts/outdated-issue.sh reports them in one issue.
-# The entries stay so Dependabot security updates keep working.
+# The entries stay so Dependabot security updates keep working, with access to the private registry.
 version: 2
+registries:
+  # Needs a Dependabot secret of the same name (gh secret set PACKAGES_READ_TOKEN --app dependabot).
+  github-packages:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{ secrets.PACKAGES_READ_TOKEN }}
 updates:
   - package-ecosystem: github-actions
     directory: /
@@ -9,6 +15,8 @@ updates:
     open-pull-requests-limit: 0
   - package-ecosystem: npm
     directory: /
+    registries:
+      - github-packages
     schedule:
       interval: weekly
     open-pull-requests-limit: 0

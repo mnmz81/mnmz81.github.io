@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AnalyticsService } from './core/analytics.service';
 import { SITE } from './core/site.config';
 import { SiteFooter } from './shared/layout/site-footer/site-footer';
+import { SkipLink } from '@mushilu-san/ui/navigation';
 import { SiteHeader } from './shared/layout/site-header/site-header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SiteHeader, SiteFooter],
+  imports: [RouterOutlet, SiteHeader, SiteFooter, SkipLink],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,10 +25,5 @@ export class App {
     const link = this.document.createElement('link');
     Object.assign(link, { rel: 'alternate', type: 'application/rss+xml', title: `${SITE.title} — Blog`, href: '/rss.xml' });
     this.document.head.appendChild(link);
-  }
-
-  protected skipToMain(event: Event): void {
-    event.preventDefault();
-    this.document.getElementById('main')?.focus();
   }
 }

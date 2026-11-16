@@ -1,44 +1,43 @@
-import { ChangeDetectionStrategy, Component, ElementRef, signal, viewChild } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectionStrategy, Component, type Signal, inject, signal } from '@angular/core';
+import { Router, RouterLink, isActive } from '@angular/router';
+import { NavLink as MuiNavLink, SiteHeader as MuiSiteHeader } from '@mushilu-san/ui/navigation';
 import { SITE } from '../../../core/site.config';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
 interface NavLink {
   label: string;
   path: string;
+  /** Current section; a signal, so the OnPush header follows navigation. Not set on external links. */
+  active?: Signal<boolean>;
   /** Absolute URL outside this site; opens in a new tab. */
   external?: boolean;
 }
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink, RouterLinkActive, ThemeToggle],
+  imports: [RouterLink, ThemeToggle, MuiNavLink, MuiSiteHeader],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(document:keydown.escape)': 'onEscape()' },
 })
 export class SiteHeader {
+  private readonly router = inject(Router);
+
   protected readonly links: NavLink[] = [
-    { label: 'About', path: '/about' },
-    { label: 'Projects', path: '/projects' },
+    this.internal('About', '/about'),
+    this.internal('Projects', '/projects'),
     // The built-in blog is off: Blog points at the external learning blog (Loom).
-    SITE.features.blog ? { label: 'Blog', path: '/blog' } : { label: 'Blog', path: SITE.blogUrl, external: true },
+    SITE.features.blog ? this.internal('Blog', '/blog') : { label: 'Blog', path: SITE.blogUrl, external: true },
   ];
   protected readonly menuOpen = signal(false);
-  private readonly menuButton = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');
 
-  protected toggleMenu(): void {
-    this.menuOpen.update((open) => !open);
-  }
-
-  protected closeMenu(): void {
-    this.menuOpen.set(false);
-  }
-
-  protected onEscape(): void {
-    if (!this.menuOpen()) return;
-    this.closeMenu();
-    this.menuButton().nativeElement.focus();
+  private internal(label: string, path: string): NavLink {
+    const active = isActive(path, this.router, {
+      paths: 'subset',
+      queryParams: 'ignored',
+      fragment: 'ignored',
+      matrixParams: 'ignored',
+    });
+    return { label, path, active };
   }
 }
