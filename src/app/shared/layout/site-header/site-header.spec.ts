@@ -50,6 +50,8 @@ describe('SiteHeader', () => {
     await fixture.whenStable();
     const button = el.querySelector<HTMLButtonElement>('button[aria-controls]')!;
     const firstLink = el.querySelector<HTMLAnchorElement>('nav a')!;
+    // The library hides the button on wide screens and jsdom has no viewport: show it, or it cannot take focus.
+    button.style.display = 'inline-flex';
     expect(el.querySelector('nav')?.id).toBe(button.getAttribute('aria-controls'));
     expect(button.getAttribute('aria-expanded')).toBe('false');
 
